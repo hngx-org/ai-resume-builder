@@ -2,6 +2,7 @@ import 'package:ai_resume_builder/constant/brain.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/constant/sizedboxes.dart';
+import 'package:ai_resume_builder/navigation_bar.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/form_button1.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/text_input_widget1.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +121,17 @@ class _SignInViewState extends State<SignInView> {
                   ),
                 ),
                 SizedBoxes.sizedBox10,
-                FormButton1(text: "Sign In", onPressed: () {}),
+                FormButton1(
+                    text: "Sign In",
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const BottomNavBar();
+                        }),
+                        (route) => false,
+                      );
+                    }),
               ],
             ),
           ),
