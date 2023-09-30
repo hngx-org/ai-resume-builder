@@ -1,5 +1,8 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/sign_in_screen.dart';
+import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/sign_up_screen.dart';
+import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/form_button1.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageView extends StatelessWidget {
@@ -41,36 +44,13 @@ class LandingPageView extends StatelessWidget {
             const SizedBox(
               height: 23,
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: TextButton(
-                onPressed: () {
-                  
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    AppColor.bottomNavigationBar,
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        3.0,
-                      ),
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: "Inter",
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0.15,
-                  ),
-                ),
-              ),
+            FormButton1(
+              text: "Sign Up",
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const SignUpView();
+                  }));
+              },
             ),
             const SizedBox(
               height: 7,
@@ -79,7 +59,11 @@ class LandingPageView extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                   Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const SignInView();
+                  }));
+                },
                 style: ButtonStyle(
                   side: MaterialStateProperty.all(
                     const BorderSide(
@@ -112,3 +96,4 @@ class LandingPageView extends StatelessWidget {
     );
   }
 }
+
