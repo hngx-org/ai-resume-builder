@@ -1,4 +1,4 @@
-import 'package:ai_resume_builder/navigation_bar.dart';
+import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Resume Ai builder',
-      home: BottomNavBar(),
+      // home: BottomNavBar(),
+      home: LandingPageView(),
     );
   }
 }
