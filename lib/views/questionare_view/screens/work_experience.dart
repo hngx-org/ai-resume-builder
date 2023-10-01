@@ -1,12 +1,13 @@
 // ignore_for_file: camel_case_types
 import 'package:ai_resume_builder/views/questionare_view/screens/education_level_screen.dart';
 import 'package:flutter/material.dart';
+
 import '../../../constant/colors.dart';
 import '../../../constant/image_path.dart';
 import '../widgets/purple_cell.dart';
 
-class work_Experience extends StatelessWidget {
-  work_Experience({super.key});
+class WorkExperienceScreen extends StatelessWidget {
+  WorkExperienceScreen({super.key});
   final List<String> experience = [
     "Entry-Level (0-2 years)",
     "Mid-Level (2-5 years)",
@@ -45,11 +46,7 @@ class work_Experience extends StatelessWidget {
             padding: const EdgeInsets.only(right: 18),
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => education_Level(),
-                  ),
-                );
+                Navigator.pop(context);
               },
               child: Image.asset(
                 ImagePath.next,
@@ -106,35 +103,41 @@ class work_Experience extends StatelessWidget {
               ),
             ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: 360,
-              height: 50,
-              decoration: BoxDecoration(color: AppColor.bottomNavigationBar),
-              child: const Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 18, vertical: 19),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
-                        letterSpacing: 0.20,
-                      ),
-                    ),
-                  ],
-                ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        height: 50,
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        decoration: BoxDecoration(color: AppColor.bottomNavigationBar),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Image.asset(
+                ImagePath.back, // Replace with your image asset path
+                width: 22, // Adjust the width as needed
+                height: 22, // Adjust the height as needed
               ),
             ),
-          ),
-        ],
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EducationLevelScreen(),
+                  ),
+                );
+              },
+              child: Image.asset(
+                ImagePath.next, // Replace with your image asset path
+                width: 22, // Adjust the width as needed
+                height: 22, // Adjust the height as needed
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

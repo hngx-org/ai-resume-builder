@@ -30,7 +30,7 @@ class FormButton1 extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 15,
             fontFamily: "Inter",

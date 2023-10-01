@@ -4,8 +4,8 @@ import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dar
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class education_Level extends StatelessWidget {
-  education_Level({super.key});
+class EducationLevelScreen extends StatelessWidget {
+  EducationLevelScreen({super.key});
   final List<String> education = [
     "Associate of Arts (AA)",
     "Associate of Applied Arts (AAA)",
@@ -127,8 +127,8 @@ class education_Level extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap:
                       true, // To make the ListView take only the space it needs
-                  itemCount: education
-                      .length, // Replace with the actual item count
+                  itemCount:
+                      education.length, // Replace with the actual item count
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -144,35 +144,41 @@ class education_Level extends StatelessWidget {
               ),
             ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: 360,
-              height: 50,
-              decoration: BoxDecoration(color: AppColor.bottomNavigationBar),
-              child: const Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 18, vertical: 19),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
-                        letterSpacing: 0.20,
-                      ),
-                    ),
-                  ],
-                ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        height: 50,
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        decoration: BoxDecoration(color: AppColor.bottomNavigationBar),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Image.asset(
+                ImagePath.back, // Replace with your image asset path
+                width: 22, // Adjust the width as needed
+                height: 22, // Adjust the height as needed
               ),
             ),
-          ),
-        ],
+            InkWell(
+              onTap: () {
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => WorkExperienceScreen(),
+                //   ),
+                // );
+              },
+              child: Image.asset(
+                ImagePath.next, // Replace with your image asset path
+                width: 22, // Adjust the width as needed
+                height: 22, // Adjust the height as needed
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

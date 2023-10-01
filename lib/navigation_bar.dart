@@ -85,7 +85,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
           ),
           body: Column(
-            children: [Expanded(child: pages[_currentIndex])],
+            children: [
+              Expanded(
+                child: pages[_currentIndex],
+              ),
+            ],
           ),
         ),
       ),
