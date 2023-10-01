@@ -1,5 +1,6 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/views/questionare_view/screens/desired_role.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,13 @@ class SelectResumeTile extends StatelessWidget {
             image: ImagePath.chatGpt,
             text: 'Create Resume\nWith Ai',
             color: AppColor.createResumeWithAI,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => role_Screen(),
+                ),
+              );
+            },
           ),
           const SizedBox(
             height: 10,

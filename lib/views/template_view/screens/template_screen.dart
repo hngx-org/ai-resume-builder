@@ -10,6 +10,7 @@ class TemplateScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0.0,
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text(
           'Resume Pro',
