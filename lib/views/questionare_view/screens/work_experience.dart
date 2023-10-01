@@ -1,7 +1,6 @@
 // ignore_for_file: camel_case_types
 import 'package:ai_resume_builder/views/questionare_view/screens/education_level_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../../../constant/colors.dart';
 import '../../../constant/image_path.dart';
 import '../widgets/purple_cell.dart';
@@ -46,7 +45,11 @@ class WorkExperienceScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 18),
             child: InkWell(
               onTap: () {
-                Navigator.pop(context);
+               Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EducationLevelScreen(),
+                  ),
+                );
               },
               child: Image.asset(
                 ImagePath.next,
@@ -56,7 +59,7 @@ class WorkExperienceScreen extends StatelessWidget {
             ),
           ),
         ], // Centered text
-        centerTitle: true, // Center the title text
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -85,17 +88,17 @@ class WorkExperienceScreen extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   shrinkWrap:
-                      true, // To make the ListView take only the space it needs
+                      true, 
                   itemCount:
-                      experience.length, // Replace with the actual item count
+                      experience.length, 
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 7),
                       child: Text(
-                        experience[index], // Replace with the item text
+                        experience[index], 
                         style: const TextStyle(
-                            fontSize: 16), // Customize text style as needed
+                            fontSize: 16),
                       ),
                     );
                   },
@@ -117,9 +120,9 @@ class WorkExperienceScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: Image.asset(
-                ImagePath.back, // Replace with your image asset path
-                width: 22, // Adjust the width as needed
-                height: 22, // Adjust the height as needed
+                ImagePath.back, 
+                width: 22,
+                height: 22, 
               ),
             ),
             InkWell(
@@ -131,9 +134,9 @@ class WorkExperienceScreen extends StatelessWidget {
                 );
               },
               child: Image.asset(
-                ImagePath.next, // Replace with your image asset path
-                width: 22, // Adjust the width as needed
-                height: 22, // Adjust the height as needed
+                ImagePath.next, 
+                width: 22, 
+                height: 22,
               ),
             ),
           ],
