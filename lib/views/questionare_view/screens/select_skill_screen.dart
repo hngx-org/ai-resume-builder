@@ -1,86 +1,80 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
-import 'package:ai_resume_builder/views/questionare_view/screens/work_experience.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
 import 'package:flutter/material.dart';
 
-class RoleScreen extends StatelessWidget {
-  RoleScreen({super.key});
-  // ignore: non_constant_identifier_names
-  final List<String> job_Categories = [
-  "Accountant",
-  "Architect",
-  "Chef",
-  "Data Analyst",
-  "Electrician",
-  "Financial Analyst",
-  "Graphic Designer",
-  "Human Resources Manager",
-  "IT Consultant",
-  "Journalist",
-  "Marketing Manager",
-  "Nurse",
-  "Operations Manager",
-  "Quality Assurance Specialist",
-  "Accountant",
-  "Software Engineer",
-  "Product Manager",
-  "Web Developer",
-  "Network Engineer",
-  "Teacher",
-  "Doctor",
-  "Lawyer",
-  "Police Officer",
-  "Artist",
-  "Mechanical Engineer",
-  "Civil Engineer",
-  "Psychologist",
-  "Social Worker",
-  "Dentist",
-  "Pharmacist",
-  "Electrician",
-  "Plumber",
-  "Sales Manager",
-  "Project Manager",
-  "Financial Planner",
-  "Marketing Coordinator",
-  "Data Scientist",
-  "UI/UX Designer",
-  "Environmental Scientist",
-  "Event Planner",
-  "Human Resources Specialist",
-  "Content Writer",
-  "Digital Marketing Specialist",
-  "Mechanic",
-  "Research Scientist",
-  "Business Analyst",
-  "Customer Service Representative",
-  "Pharmacy Technician",
-  "Security Guard",
+// ignore: camel_case_types
+class select_Skill extends StatelessWidget {
+  select_Skill({super.key});
+ final List<String> skills = [
+  'HTML/CSS',
+  'Adobe Illustrator',
+  'Rive',
+  'Canva',
+  'Flutter',
+  'Dart',
+  'JavaScript',
+  'Leadership',
+  'Communication',
+  'Problem Solving',
+  'Creativity',
+  'Leadership',
+  'Tailwind CSS',
+  'Figma',
+  'React',
+  'Node.js',
+  'Python',
+  'Java',
+  'Git',
+  'UI/UX Design',
+  'Android Development',
+  'iOS Development',
+  'Data Analysis',
+  'Machine Learning',
+  'Artificial Intelligence',
+  'Database Design',
+  'Network Security',
+  'Digital Marketing',
+  'Content Writing',
+  'Video Editing',
+  'Photography',
+  'Product Management',
+  'Project Management',
+  'Customer Service',
+  'Financial Analysis',
+  'E-commerce',
+  'Cloud Computing',
+  'Cybersecurity',
+  'Game Development',
+  'Graphic Design',
+  'User Research',
+  'Time Management',
+  'Critical Thinking',
+  'Conflict Resolution',
+  'Event Planning',
+  'Search Engine Optimization (SEO)',
+  'Market Research',
+  'Medical Research',
+  'Public Speaking',
 ];
-
-
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
         backgroundColor: Colors.black,
         elevation: 0.0,
-        // leading: const Center(
-        //   child: Text(
-        //     "Skip",
-        //     style: TextStyle(
-        //       fontSize: 13,
-        //       fontFamily: 'Inter',
-        //       fontWeight: FontWeight.w400,
-        //       height: 0,
-        //       letterSpacing: 0.20,
-        //     ),
-        //   ),
-        // ), // Leading text
+        leading: Center(
+          child: InkWell(
+            onTap: () => Navigator.of(context).pop(),
+            child: Image.asset(
+              ImagePath.back,
+              width: 20,
+              height: 20,
+            ),
+          ),
+        ), // Leading text
         title: const Text(
           "Resume Questions",
           style: TextStyle(
@@ -90,8 +84,18 @@ class RoleScreen extends StatelessWidget {
             height: 0,
             letterSpacing: 0.30,
           ),
-        ), // Centered text
-        centerTitle: true, // Center the title text
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18),
+            child: Image.asset(
+              ImagePath.next,
+              width: 20,
+              height: 20,
+            ),
+          ),
+        ], // Centered text
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -101,7 +105,7 @@ class RoleScreen extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 33, vertical: 12),
                   child: Text(
-                    'What is your desired job role category?',
+                    'What is your skills?',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -132,7 +136,7 @@ class RoleScreen extends StatelessWidget {
                       child: TextField(
                         cursorColor: Color(0xFF7851A9), // Set cursor color
                         decoration: InputDecoration(
-                          hintText: 'Select your job category',
+                          hintText: 'Search your skills here',
                           border: InputBorder.none, // Remove border line
                         ),
                       ),
@@ -146,15 +150,15 @@ class RoleScreen extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   shrinkWrap:
-                      true, // To make the ListView take only the space it needs
-                  itemCount: job_Categories
-                      .length, // Replace with the actual item count
+                      true,
+                  itemCount:
+                      skills.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 7),
                       child: Text(
-                        job_Categories[index], // Replace with the item text
+                        skills[index], // Replace with the item text
                         style: const TextStyle(
                             fontSize: 16), // Customize text style as needed
                       ),
@@ -173,28 +177,27 @@ class RoleScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Skip',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 13,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w400,
-                height: 0,
-                letterSpacing: 0.20,
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Image.asset(
+                ImagePath.back,
+                width: 22,
+                height: 22, 
               ),
             ),
             InkWell(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => WorkExperienceScreen(),
-                  ),
-                );
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => WorkExperienceScreen(),
+                //   ),
+                // );
               },
               child: Image.asset(
-                ImagePath.next,
-                width: 22,
+                ImagePath.next, 
+                width: 22, 
                 height: 22,
               ),
             ),
