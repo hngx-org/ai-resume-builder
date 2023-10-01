@@ -27,10 +27,11 @@ class SelectResumeTile extends StatelessWidget {
             image: ImagePath.chatGpt,
             text: 'Create Resume\nWith Ai',
             color: AppColor.createResumeWithAI,
+            subText: 'Recommended',
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => role_Screen(),
+                  builder: (context) => RoleScreen(),
                 ),
               );
             },

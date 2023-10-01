@@ -5,8 +5,8 @@ import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dar
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class role_Screen extends StatelessWidget {
-  role_Screen({super.key});
+class RoleScreen extends StatelessWidget {
+  RoleScreen({super.key});
   final List<String> job_Categories = [
     "Accountant",
     "Architect",
@@ -140,49 +140,81 @@ class role_Screen extends StatelessWidget {
               ),
             ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: 360,
-              height: 50,
-              decoration: BoxDecoration(color: AppColor.bottomNavigationBar),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 19),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
-                        letterSpacing: 0.20,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => work_Experience(),
-                          ),
-                        );
-                      },
-                      child: Image.asset(
-                        ImagePath.next, // Replace with your image asset path
-                        width: 35, // Adjust the width as needed
-                        height: 40, // Adjust the height as needed
-                      ),
-                    ),
-                  ],
-                ),
+          // Container(
+          //   width: 360,
+          //   height: 50,
+          //   decoration: BoxDecoration(color: AppColor.bottomNavigationBar),
+          //   child: Padding(
+          //     padding:
+          //         const EdgeInsets.symmetric(horizontal: 18, vertical: 19),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         const Text(
+          //           'Skip',
+          //           style: TextStyle(
+          //             color: Colors.white,
+          //             fontSize: 13,
+          //             fontFamily: 'Inter',
+          //             fontWeight: FontWeight.w400,
+          //             height: 0,
+          //             letterSpacing: 0.20,
+          //           ),
+          //         ),
+          //         InkWell(
+          //           onTap: () {
+          //             Navigator.of(context).push(
+          //               MaterialPageRoute(
+          //                 builder: (context) => work_Experience(),
+          //               ),
+          //             );
+          //           },
+          //           child: Image.asset(
+          //             ImagePath.next, // Replace with your image asset path
+          //             width: 35, // Adjust the width as needed
+          //             height: 40, // Adjust the height as needed
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        height: 50,
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        decoration: BoxDecoration(color: AppColor.bottomNavigationBar),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Skip',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+                height: 0,
+                letterSpacing: 0.20,
               ),
             ),
-          ),
-        ],
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => WorkExperienceScreen(),
+                  ),
+                );
+              },
+              child: Image.asset(
+                ImagePath.next, // Replace with your image asset path
+                width: 22, // Adjust the width as needed
+                height: 22, // Adjust the height as needed
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,6 +7,6 @@ abstract class ImagePath {
   static String chatGpt = 'assets/images/chat_gpt.png';
   static String pencil = 'assets/images/pencil.png';
   static String logo = 'assets/images/logo.png';
-  static const String next = 'assets/images/icon _Chevron.png';
-   static const String back ='assets/images/Chevron Circle Right.png';
+  static const String next = 'assets/images/next.png';
+  static const String back = 'assets/images/previous.png';
 }
