@@ -17,7 +17,7 @@ class SelectResumeTile extends StatelessWidget {
             ImagePath.coloredResume,
             height: 400,
             width: double.maxFinite,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             filterQuality: FilterQuality.high,
           ),
           const SizedBox(

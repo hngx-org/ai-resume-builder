@@ -1,63 +1,63 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/views/preview_view/screens/preview_screen.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class select_Skill extends StatelessWidget {
   select_Skill({super.key});
- final List<String> skills = [
-  'HTML/CSS',
-  'Adobe Illustrator',
-  'Rive',
-  'Canva',
-  'Flutter',
-  'Dart',
-  'JavaScript',
-  'Leadership',
-  'Communication',
-  'Problem Solving',
-  'Creativity',
-  'Leadership',
-  'Tailwind CSS',
-  'Figma',
-  'React',
-  'Node.js',
-  'Python',
-  'Java',
-  'Git',
-  'UI/UX Design',
-  'Android Development',
-  'iOS Development',
-  'Data Analysis',
-  'Machine Learning',
-  'Artificial Intelligence',
-  'Database Design',
-  'Network Security',
-  'Digital Marketing',
-  'Content Writing',
-  'Video Editing',
-  'Photography',
-  'Product Management',
-  'Project Management',
-  'Customer Service',
-  'Financial Analysis',
-  'E-commerce',
-  'Cloud Computing',
-  'Cybersecurity',
-  'Game Development',
-  'Graphic Design',
-  'User Research',
-  'Time Management',
-  'Critical Thinking',
-  'Conflict Resolution',
-  'Event Planning',
-  'Search Engine Optimization (SEO)',
-  'Market Research',
-  'Medical Research',
-  'Public Speaking',
-];
-
+  final List<String> skills = [
+    'HTML/CSS',
+    'Adobe Illustrator',
+    'Rive',
+    'Canva',
+    'Flutter',
+    'Dart',
+    'JavaScript',
+    'Leadership',
+    'Communication',
+    'Problem Solving',
+    'Creativity',
+    'Leadership',
+    'Tailwind CSS',
+    'Figma',
+    'React',
+    'Node.js',
+    'Python',
+    'Java',
+    'Git',
+    'UI/UX Design',
+    'Android Development',
+    'iOS Development',
+    'Data Analysis',
+    'Machine Learning',
+    'Artificial Intelligence',
+    'Database Design',
+    'Network Security',
+    'Digital Marketing',
+    'Content Writing',
+    'Video Editing',
+    'Photography',
+    'Product Management',
+    'Project Management',
+    'Customer Service',
+    'Financial Analysis',
+    'E-commerce',
+    'Cloud Computing',
+    'Cybersecurity',
+    'Game Development',
+    'Graphic Design',
+    'User Research',
+    'Time Management',
+    'Critical Thinking',
+    'Conflict Resolution',
+    'Event Planning',
+    'Search Engine Optimization (SEO)',
+    'Market Research',
+    'Medical Research',
+    'Public Speaking',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -149,10 +149,8 @@ class select_Skill extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  shrinkWrap:
-                      true,
-                  itemCount:
-                      skills.length,
+                  shrinkWrap: true,
+                  itemCount: skills.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -184,20 +182,20 @@ class select_Skill extends StatelessWidget {
               child: Image.asset(
                 ImagePath.back,
                 width: 22,
-                height: 22, 
+                height: 22,
               ),
             ),
             InkWell(
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => WorkExperienceScreen(),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PreviewScreen(),
+                  ),
+                );
               },
               child: Image.asset(
-                ImagePath.next, 
-                width: 22, 
+                ImagePath.next,
+                width: 22,
                 height: 22,
               ),
             ),
