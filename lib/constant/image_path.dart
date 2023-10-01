@@ -8,6 +8,7 @@ abstract class ImagePath {
   static String pencil = 'assets/images/pencil.png';
   static String crown = 'assets/images/crown.png';
   static String logo = 'assets/images/logo.png';
-  static const String next = 'assets/images/next.png';
-  static const String back = 'assets/images/previous.png';
+  static String next = 'assets/images/next.png';
+  static String download = 'assets/images/download.png';
+  static String back = 'assets/images/previous.png';
 }
