@@ -79,6 +79,7 @@ class SelectResumeTile extends StatelessWidget {
               text,
               style: const TextStyle(
                 fontWeight: FontWeight.w700,
+                fontFamily: 'Inter',
                 color: Colors.white,
               ),
             ),
