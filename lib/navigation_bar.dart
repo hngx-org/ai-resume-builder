@@ -1,5 +1,7 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/views/my_resume_view/screens/my_resume_screen.dart';
+import 'package:ai_resume_builder/views/profile_page_view/screens/profile_screen.dart';
 import 'package:ai_resume_builder/views/template_view/screens/template_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +16,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
   List pages = [
     const TemplateScreen(),
-    const Center(
-      child: Text('My Resume'),
-    ),
-    const Center(
-      child: Text('Profile'),
-    ),
+    // const Center(
+    //   child: Text('My Resume'),
+    // ),
+    const MyResumeScreen(),
+    // const Center(
+    //   child: Text('Profile'),
+    // ),
+    const ProfilePageScreen(),
   ];
 
   @override
