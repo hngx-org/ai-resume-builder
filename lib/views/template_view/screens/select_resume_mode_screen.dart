@@ -13,7 +13,8 @@ class SelectResumeModeScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Resume Pro',
-          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
         ),
       ),
       body: const SingleChildScrollView(
