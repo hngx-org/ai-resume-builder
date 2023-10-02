@@ -31,7 +31,6 @@ class _RoleScreenState extends State<RoleScreen> {
     "Nurse",
     "Operations Manager",
     "Quality Assurance Specialist",
-    "Accountant",
     "Software Engineer",
     "Product Manager",
     "Web Developer",
@@ -47,7 +46,6 @@ class _RoleScreenState extends State<RoleScreen> {
     "Social Worker",
     "Dentist",
     "Pharmacist",
-    "Electrician",
     "Plumber",
     "Sales Manager",
     "Project Manager",
@@ -145,30 +143,32 @@ class _RoleScreenState extends State<RoleScreen> {
                   itemCount: jobCategories.length,
                   itemBuilder: (BuildContext context, int index) {
                     final category = jobCategories[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 7),
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectedCategory = category;
-                            textEditingController.text = ""; // Clear text field
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedCategory = category;
+                          textEditingController.text = ""; // Clear text field
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 25,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: category == selectedCategory
+                              ? AppColor
+                                  .upgradeToProDarkMode // Highlight selected category
+                              : Colors.transparent,
+                        ),
+                        child: Text(
+                          category,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: "Inter",
                             color: category == selectedCategory
-                                ? AppColor.upgradeToProDarkMode // Highlight selected category
-                                : Colors.transparent,
-                          ),
-                          child: Text(
-                            category,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: category == selectedCategory
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),

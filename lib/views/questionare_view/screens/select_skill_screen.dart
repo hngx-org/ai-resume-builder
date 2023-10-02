@@ -141,7 +141,8 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: TextField(
                         controller: textEditingController,
-                        cursorColor: const Color(0xFF7851A9), // Set cursor color
+                        cursorColor:
+                            const Color(0xFF7851A9), // Set cursor color
                         decoration: const InputDecoration(
                           hintText: 'Enter your skills here',
                           border: InputBorder.none, // Remove border line
@@ -160,30 +161,31 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                   itemCount: skills.length,
                   itemBuilder: (BuildContext context, int index) {
                     final skill = skills[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 7),
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectedSkill = skill;
-                            textEditingController.text = ""; // Clear text field
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedSkill = skill;
+                          textEditingController.text = ""; // Clear text field
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 25,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: skill == selectedSkill
+                              ? AppColor
+                                  .upgradeToProDarkMode // Highlight selected skill
+                              : Colors.transparent,
+                        ),
+                        child: Text(
+                          skill,
+                          style: TextStyle(
+                            fontSize: 16,
                             color: skill == selectedSkill
-                                ? AppColor.upgradeToProDarkMode // Highlight selected skill
-                                : Colors.transparent,
-                          ),
-                          child: Text(
-                            skill,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: skill == selectedSkill
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),
