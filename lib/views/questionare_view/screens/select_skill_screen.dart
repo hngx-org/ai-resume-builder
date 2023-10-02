@@ -147,7 +147,8 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: TextField(
                         controller: textEditingController,
-                        cursorColor: const Color(0xFF7851A9), // Set cursor color
+                        cursorColor:
+                            const Color(0xFF7851A9), // Set cursor color
                         decoration: const InputDecoration(
                           hintText: 'Enter your skills here',
                           border: InputBorder.none, // Remove border line
@@ -166,33 +167,31 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                   itemCount: skills.length,
                   itemBuilder: (BuildContext context, int index) {
                     final skill = skills[index];
-                    final isSelected = skill == selectedSkill;
-
                     return InkWell(
                       onTap: () {
                         setState(() {
-                          if (isSelected) {
-                            selectedSkill = ""; // Deselect if already selected
-                            textEditingController.clear();
-                          } else {
-                            selectedSkill = skill;
-                            textEditingController.text = skill;
-                          }
+                          selectedSkill = skill;
+                          textEditingController.text = ""; // Clear text field
                         });
                       },
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: isSelected ? AppColor.upgradeToProDarkMode : Colors.transparent,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 25,
+                          vertical: 10,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 7),
-                          child: Text(
-                            skill,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: isSelected ? Colors.white : Colors.black,
-                            ),
+                        decoration: BoxDecoration(
+                          color: skill == selectedSkill
+                              ? AppColor
+                                  .upgradeToProDarkMode // Highlight selected skill
+                              : Colors.transparent,
+                        ),
+                        child: Text(
+                          skill,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: skill == selectedSkill
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),

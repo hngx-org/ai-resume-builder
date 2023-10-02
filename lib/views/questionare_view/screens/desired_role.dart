@@ -45,7 +45,6 @@ class _RoleScreenState extends State<RoleScreen> {
     "Social Worker",
     "Dentist",
     "Pharmacist",
-    "Electrician",
     "Plumber",
     "Sales Manager",
     "Project Manager",
@@ -143,35 +142,32 @@ class _RoleScreenState extends State<RoleScreen> {
                   itemCount: jobCategories.length,
                   itemBuilder: (BuildContext context, int index) {
                     final category = jobCategories[index];
-                    final isSelected = category == selectedCategory;
-
                     return InkWell(
                       onTap: () {
                         setState(() {
-                          if (isSelected) {
-                            selectedCategory = ""; // Deselect if already selected
-                            textEditingController.clear();
-                          } else {
-                            selectedCategory = category;
-                            textEditingController.text = category;
-                          }
+                          selectedCategory = category;
+                          textEditingController.text = ""; // Clear text field
                         });
                       },
                       child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 25,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
-                          color: isSelected
-                              ? AppColor.upgradeToProDarkMode
+                          color: category == selectedCategory
+                              ? AppColor
+                                  .upgradeToProDarkMode // Highlight selected category
                               : Colors.transparent,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 7),
-                          child: Text(
-                            category,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: isSelected ? Colors.white : Colors.black,
-                            ),
+                        child: Text(
+                          category,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: "Inter",
+                            color: category == selectedCategory
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),

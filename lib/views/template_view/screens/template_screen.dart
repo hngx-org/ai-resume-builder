@@ -14,7 +14,11 @@ class TemplateScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Resume Pro',
-          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 30.0,
+            fontFamily: "Inter",
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: const TemplatesTile(),

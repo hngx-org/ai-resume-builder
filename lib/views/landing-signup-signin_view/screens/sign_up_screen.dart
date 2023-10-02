@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
+// import 'dart:convert';
+
 import 'package:ai_resume_builder/constant/brain.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
@@ -6,6 +10,8 @@ import 'package:ai_resume_builder/navigation_bar.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/form_button1.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/text_input_widget1.dart';
 import 'package:flutter/material.dart';
+// import 'package:hng_authentication/authentication.dart';
+// import 'package:hng_authentication/widgets/widget.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -17,6 +23,10 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
+    final TextEditingController fullNameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -49,19 +59,16 @@ class _SignUpViewState extends State<SignUpView> {
                 const SizedBox(
                   height: 20,
                 ),
-                const TextInputWidget1(
-                  hintText: "First Name",
+                TextInputWidget1(
+                  hintText: "Full Name",
                   keyboardType: TextInputType.text,
+                  controller: fullNameController,
                 ),
                 SizedBoxes.sizedBox10,
-                const TextInputWidget1(
-                  hintText: "Last Name",
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBoxes.sizedBox10,
-                const TextInputWidget1(
+                TextInputWidget1(
                   hintText: "E-mail Address",
                   keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
                 ),
                 SizedBoxes.sizedBox10,
                 SizedBox(
@@ -70,6 +77,7 @@ class _SignUpViewState extends State<SignUpView> {
                     onTapOutside: (event) {
                       FocusManager.instance.primaryFocus?.unfocus();
                     },
+                    controller: passwordController,
                     keyboardType: TextInputType.text,
                     obscureText: obscureText,
                     cursorColor: AppColor.bottomNavigationBar,
@@ -132,14 +140,52 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 SizedBoxes.sizedBox10,
                 FormButton1(
-                    text: "Sign Up",
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const BottomNavBar(),
-                        ),
-                      );
-                    }),
+                  text: "Sign Up",
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const BottomNavBar(),
+                      ),
+                    );
+                  },
+                  // onPressed: () async {
+                  //   final name = (fullNameController).text;
+                  //   final email = (emailController).text;
+                  //   final password = (passwordController).text;
+
+                  //   final authRepository = Authentication();
+
+                  //   final result =
+                  //       await authRepository.signUp(email, name, password);
+
+                  //   try {
+                  //     if (result != null) {
+                  //       // Registration failed, display an error message
+
+                  //       print("result is: $result");
+                  //       final data = json.decode(result.body);
+                  //       print(data);
+                  //       showSnackbar(
+                  //           context, Colors.black, 'SignUp successful');
+                  //       print('sign up result: >>> $data');
+                  //       Navigator.pushAndRemoveUntil(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //           builder: ((context) {
+                  //             return const BottomNavBar();
+                  //           }),
+                  //         ),
+                  //         (route) => false,
+                  //       );
+                  //     } else {
+                  //       print('errror:   eeeeeee');
+                  //       showSnackbar(context, Colors.red, 'SignUp ERROR');
+                  //     }
+                  //   } catch (e) {
+                  //     print(e);
+                  //   }
+                  // },
+                ),
               ],
             ),
           ),
