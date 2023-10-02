@@ -171,7 +171,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                       onTap: () {
                         setState(() {
                           selectedSkill = skill;
-                          textEditingController.text = ""; // Clear text field
+                          textEditingController.text = skill; 
                         });
                       },
                       child: Container(
