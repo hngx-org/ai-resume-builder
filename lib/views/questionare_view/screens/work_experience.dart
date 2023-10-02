@@ -107,7 +107,7 @@ class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
                         });
                       },
                       child: Container(
-                        color: selected ? Colors.purple : Colors.transparent,
+                        color: selected ? AppColor.upgradeToProDarkMode : Colors.transparent,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 25, vertical: 7),

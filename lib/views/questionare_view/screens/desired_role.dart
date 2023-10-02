@@ -128,7 +128,7 @@ class _RoleScreenState extends State<RoleScreen> {
                         cursorColor:
                             const Color(0xFF7851A9), // Set cursor color
                         decoration: const InputDecoration(
-                          hintText: 'Select your job category',
+                          hintText: 'Enter your job category',
                           border: InputBorder.none, // Remove border line
                         ),
                       ),
@@ -158,7 +158,7 @@ class _RoleScreenState extends State<RoleScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: category == selectedCategory
-                                ? Colors.purple // Highlight selected category
+                                ? AppColor.upgradeToProDarkMode // Highlight selected category
                                 : Colors.transparent,
                           ),
                           child: Text(
@@ -207,7 +207,7 @@ class _RoleScreenState extends State<RoleScreen> {
                 );
               },
               child: Image.asset(
-                ImagePath.back,
+                ImagePath.next,
                 width: 22,
                 height: 22,
               ),

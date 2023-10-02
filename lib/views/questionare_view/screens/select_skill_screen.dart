@@ -22,7 +22,6 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
     'Flutter',
     'Dart',
     'JavaScript',
-    'Leadership',
     'Communication',
     'Problem Solving',
     'Creativity',
@@ -144,7 +143,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                         controller: textEditingController,
                         cursorColor: const Color(0xFF7851A9), // Set cursor color
                         decoration: const InputDecoration(
-                          hintText: 'Search your skills here',
+                          hintText: 'Enter your skills here',
                           border: InputBorder.none, // Remove border line
                         ),
                       ),
@@ -174,7 +173,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: skill == selectedSkill
-                                ? Colors.purple // Highlight selected skill
+                                ? AppColor.upgradeToProDarkMode // Highlight selected skill
                                 : Colors.transparent,
                           ),
                           child: Text(

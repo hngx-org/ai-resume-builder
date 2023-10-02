@@ -151,7 +151,7 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
                         controller: textEditingController,
                         cursorColor: const Color(0xFF7851A9),
                         decoration: const InputDecoration(
-                          hintText: 'Search your education',
+                          hintText: 'Enter your education',
                           border: InputBorder.none,
                         ),
                       ),
@@ -177,7 +177,7 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
                         });
                       },
                       child: Container(
-                        color: selected ? Colors.purple : Colors.transparent,
+                        color: selected ? AppColor.upgradeToProDarkMode : Colors.transparent,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 25, vertical: 7),
