@@ -1,7 +1,8 @@
+
+import 'package:flutter/material.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
-import 'package:flutter/material.dart';
 
 class SelectSkillScreen extends StatefulWidget {
   const SelectSkillScreen({Key? key}) : super(key: key);
@@ -80,7 +81,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               height: 20,
             ),
           ),
-        ), // Leading text
+        ),
         title: const Text(
           "Resume Questions",
           style: TextStyle(
@@ -94,13 +95,18 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18),
-            child: Image.asset(
-              ImagePath.next,
-              width: 20,
-              height: 20,
+            child: InkWell(
+              onTap: () {
+                // Implement your logic here when the Next button is pressed
+              },
+              child: Image.asset(
+                ImagePath.next,
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
-        ], // Centered text
+        ],
         centerTitle: true,
       ),
       body: Stack(
@@ -160,29 +166,32 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                   itemCount: skills.length,
                   itemBuilder: (BuildContext context, int index) {
                     final skill = skills[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 7),
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
+                    final isSelected = skill == selectedSkill;
+
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (isSelected) {
+                            selectedSkill = ""; // Deselect if already selected
+                            textEditingController.clear();
+                          } else {
                             selectedSkill = skill;
-                            textEditingController.text = ""; // Clear text field
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: skill == selectedSkill
-                                ? AppColor.upgradeToProDarkMode // Highlight selected skill
-                                : Colors.transparent,
-                          ),
+                            textEditingController.text = skill;
+                          }
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isSelected ? AppColor.upgradeToProDarkMode : Colors.transparent,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 7),
                           child: Text(
                             skill,
                             style: TextStyle(
                               fontSize: 16,
-                              color: skill == selectedSkill
-                                  ? Colors.white
-                                  : Colors.black,
+                              color: isSelected ? Colors.white : Colors.black,
                             ),
                           ),
                         ),
