@@ -1,14 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/screens/work_experience.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
-import 'package:flutter/material.dart';
 
 class RoleScreen extends StatefulWidget {
   const RoleScreen({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _RoleScreenState createState() => _RoleScreenState();
 }
 
@@ -31,7 +30,6 @@ class _RoleScreenState extends State<RoleScreen> {
     "Nurse",
     "Operations Manager",
     "Quality Assurance Specialist",
-    "Accountant",
     "Software Engineer",
     "Product Manager",
     "Web Developer",
@@ -145,29 +143,34 @@ class _RoleScreenState extends State<RoleScreen> {
                   itemCount: jobCategories.length,
                   itemBuilder: (BuildContext context, int index) {
                     final category = jobCategories[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 7),
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
+                    final isSelected = category == selectedCategory;
+
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (isSelected) {
+                            selectedCategory = ""; // Deselect if already selected
+                            textEditingController.clear();
+                          } else {
                             selectedCategory = category;
-                            textEditingController.text = ""; // Clear text field
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: category == selectedCategory
-                                ? AppColor.upgradeToProDarkMode // Highlight selected category
-                                : Colors.transparent,
-                          ),
+                            textEditingController.text = category;
+                          }
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AppColor.upgradeToProDarkMode
+                              : Colors.transparent,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 7),
                           child: Text(
                             category,
                             style: TextStyle(
                               fontSize: 16,
-                              color: category == selectedCategory
-                                  ? Colors.white
-                                  : Colors.black,
+                              color: isSelected ? Colors.white : Colors.black,
                             ),
                           ),
                         ),
