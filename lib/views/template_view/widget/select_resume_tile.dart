@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 
+import '../screens/resume_from_scratch.dart';
+
 class SelectResumeTile extends StatelessWidget {
   const SelectResumeTile(
       {super.key, required this.data, required this.templateTheme});
@@ -59,7 +61,14 @@ class SelectResumeTile extends StatelessWidget {
               image: ImagePath.pencil,
               text: 'Create Resume\nFrom Scratch',
               color: AppColor.upgradeToProDarkMode,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TemplateThemeNoneScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),
