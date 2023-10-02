@@ -1,7 +1,8 @@
+
+import 'package:flutter/material.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
-import 'package:flutter/material.dart';
 
 class SelectSkillScreen extends StatefulWidget {
   const SelectSkillScreen({Key? key}) : super(key: key);
@@ -80,7 +81,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               height: 20,
             ),
           ),
-        ), // Leading text
+        ),
         title: const Text(
           "Resume Questions",
           style: TextStyle(
@@ -94,13 +95,18 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18),
-            child: Image.asset(
-              ImagePath.next,
-              width: 20,
-              height: 20,
+            child: InkWell(
+              onTap: () {
+                // Implement your logic here when the Next button is pressed
+              },
+              child: Image.asset(
+                ImagePath.next,
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
-        ], // Centered text
+        ],
         centerTitle: true,
       ),
       body: Stack(
