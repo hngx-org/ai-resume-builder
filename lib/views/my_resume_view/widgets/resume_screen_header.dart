@@ -14,10 +14,10 @@ class CustomAppHeader extends StatelessWidget implements PreferredSizeWidget {
       height: 100,
       color: Colors.black,
       child: Padding(
-        padding: EdgeInsets.only(left: 18.0, top: 60),
+        padding: const EdgeInsets.only(left: 18.0, top: 60),
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontFamily: "Inter",
             fontSize: 20,

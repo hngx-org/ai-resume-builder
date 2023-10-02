@@ -40,11 +40,11 @@ class PreviewScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        backgroundColor: AppColor.upgradeToProDarkMode,
         child: const Icon(
           Icons.edit,
           size: 25,
         ),
-        backgroundColor: AppColor.upgradeToProDarkMode,
       ),
     );
   }

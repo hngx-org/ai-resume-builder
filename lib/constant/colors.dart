@@ -9,4 +9,5 @@ abstract class AppColor {
   static Color logOutText = const Color(0xFFFF0000);
   static Color createResumeWithAI = const Color(0xFF0BA780);
   static Color recommendText = const Color(0xFFFFD700);
+  static Color whitishBgColor = const Color(0xFFF5F5F5);
 }
