@@ -1,12 +1,20 @@
-// ignore_for_file: camel_case_types
-import 'package:ai_resume_builder/views/questionare_view/screens/education_level_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/image_path.dart';
 import '../widgets/purple_cell.dart';
+import 'education_level_screen.dart';
 
-class WorkExperienceScreen extends StatelessWidget {
-  WorkExperienceScreen({super.key});
+class WorkExperienceScreen extends StatefulWidget {
+  const WorkExperienceScreen({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _WorkExperienceScreenState createState() => _WorkExperienceScreenState();
+}
+
+class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
+  String selectedExperience = ""; // Track the selected experience
+
   final List<String> experience = [
     "Entry-Level (0-2 years)",
     "Mid-Level (2-5 years)",
@@ -29,7 +37,7 @@ class WorkExperienceScreen extends StatelessWidget {
               height: 20,
             ),
           ),
-        ), // Leading text
+        ),
         title: const Text(
           "Resume Questions",
           style: TextStyle(
@@ -45,9 +53,9 @@ class WorkExperienceScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 18),
             child: InkWell(
               onTap: () {
-               Navigator.of(context).push(
+                Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => EducationLevelScreen(),
+                    builder: (context) => const EducationLevelScreen(),
                   ),
                 );
               },
@@ -58,7 +66,7 @@ class WorkExperienceScreen extends StatelessWidget {
               ),
             ),
           ),
-        ], // Centered text
+        ],
         centerTitle: true,
       ),
       body: Stack(
@@ -87,18 +95,30 @@ class WorkExperienceScreen extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  shrinkWrap:
-                      true, 
-                  itemCount:
-                      experience.length, 
+                  shrinkWrap: true,
+                  itemCount: experience.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 7),
-                      child: Text(
-                        experience[index], 
-                        style: const TextStyle(
-                            fontSize: 16),
+                    final selected = experience[index] == selectedExperience;
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedExperience =
+                              selected ? "" : experience[index];
+                        });
+                      },
+                      child: Container(
+                        color: selected ? AppColor.upgradeToProDarkMode : Colors.transparent,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 7),
+                          child: Text(
+                            experience[index],
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: selected ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
@@ -120,22 +140,22 @@ class WorkExperienceScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: Image.asset(
-                ImagePath.back, 
+                ImagePath.back,
                 width: 22,
-                height: 22, 
+                height: 22,
               ),
             ),
             InkWell(
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => EducationLevelScreen(),
+                    builder: (context) => const EducationLevelScreen(),
                   ),
                 );
               },
               child: Image.asset(
-                ImagePath.next, 
-                width: 22, 
+                ImagePath.next,
+                width: 22,
                 height: 22,
               ),
             ),

@@ -4,63 +4,69 @@ import 'package:ai_resume_builder/views/questionare_view/screens/work_experience
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
 import 'package:flutter/material.dart';
 
-class RoleScreen extends StatelessWidget {
-  RoleScreen({super.key});
-  // ignore: non_constant_identifier_names
-  final List<String> job_Categories = [
-  "Accountant",
-  "Architect",
-  "Chef",
-  "Data Analyst",
-  "Electrician",
-  "Financial Analyst",
-  "Graphic Designer",
-  "Human Resources Manager",
-  "IT Consultant",
-  "Journalist",
-  "Marketing Manager",
-  "Nurse",
-  "Operations Manager",
-  "Quality Assurance Specialist",
-  "Accountant",
-  "Software Engineer",
-  "Product Manager",
-  "Web Developer",
-  "Network Engineer",
-  "Teacher",
-  "Doctor",
-  "Lawyer",
-  "Police Officer",
-  "Artist",
-  "Mechanical Engineer",
-  "Civil Engineer",
-  "Psychologist",
-  "Social Worker",
-  "Dentist",
-  "Pharmacist",
-  "Electrician",
-  "Plumber",
-  "Sales Manager",
-  "Project Manager",
-  "Financial Planner",
-  "Marketing Coordinator",
-  "Data Scientist",
-  "UI/UX Designer",
-  "Environmental Scientist",
-  "Event Planner",
-  "Human Resources Specialist",
-  "Content Writer",
-  "Digital Marketing Specialist",
-  "Mechanic",
-  "Research Scientist",
-  "Business Analyst",
-  "Customer Service Representative",
-  "Pharmacy Technician",
-  "Security Guard",
-];
+class RoleScreen extends StatefulWidget {
+  const RoleScreen({Key? key}) : super(key: key);
 
+  @override
+  // ignore: library_private_types_in_public_api
+  _RoleScreenState createState() => _RoleScreenState();
+}
 
+class _RoleScreenState extends State<RoleScreen> {
+  String selectedCategory = ""; // Track the selected category
+  TextEditingController textEditingController = TextEditingController();
 
+  final List<String> jobCategories = [
+    "Accountant",
+    "Architect",
+    "Chef",
+    "Data Analyst",
+    "Electrician",
+    "Financial Analyst",
+    "Graphic Designer",
+    "Human Resources Manager",
+    "IT Consultant",
+    "Journalist",
+    "Marketing Manager",
+    "Nurse",
+    "Operations Manager",
+    "Quality Assurance Specialist",
+    "Accountant",
+    "Software Engineer",
+    "Product Manager",
+    "Web Developer",
+    "Network Engineer",
+    "Teacher",
+    "Doctor",
+    "Lawyer",
+    "Police Officer",
+    "Artist",
+    "Mechanical Engineer",
+    "Civil Engineer",
+    "Psychologist",
+    "Social Worker",
+    "Dentist",
+    "Pharmacist",
+    "Electrician",
+    "Plumber",
+    "Sales Manager",
+    "Project Manager",
+    "Financial Planner",
+    "Marketing Coordinator",
+    "Data Scientist",
+    "UI/UX Designer",
+    "Environmental Scientist",
+    "Event Planner",
+    "Human Resources Specialist",
+    "Content Writer",
+    "Digital Marketing Specialist",
+    "Mechanic",
+    "Research Scientist",
+    "Business Analyst",
+    "Customer Service Representative",
+    "Pharmacy Technician",
+    "Security Guard",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -69,18 +75,6 @@ class RoleScreen extends StatelessWidget {
         automaticallyImplyLeading: true,
         backgroundColor: Colors.black,
         elevation: 0.0,
-        // leading: const Center(
-        //   child: Text(
-        //     "Skip",
-        //     style: TextStyle(
-        //       fontSize: 13,
-        //       fontFamily: 'Inter',
-        //       fontWeight: FontWeight.w400,
-        //       height: 0,
-        //       letterSpacing: 0.20,
-        //     ),
-        //   ),
-        // ), // Leading text
         title: const Text(
           "Resume Questions",
           style: TextStyle(
@@ -90,8 +84,8 @@ class RoleScreen extends StatelessWidget {
             height: 0,
             letterSpacing: 0.30,
           ),
-        ), // Centered text
-        centerTitle: true, // Center the title text
+        ),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -127,12 +121,14 @@ class RoleScreen extends StatelessWidget {
                         side: BorderSide.none, // Remove border line
                       ),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: TextField(
-                        cursorColor: Color(0xFF7851A9), // Set cursor color
-                        decoration: InputDecoration(
-                          hintText: 'Select your job category',
+                        controller: textEditingController,
+                        cursorColor:
+                            const Color(0xFF7851A9), // Set cursor color
+                        decoration: const InputDecoration(
+                          hintText: 'Enter your job category',
                           border: InputBorder.none, // Remove border line
                         ),
                       ),
@@ -145,18 +141,36 @@ class RoleScreen extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  shrinkWrap:
-                      true, // To make the ListView take only the space it needs
-                  itemCount: job_Categories
-                      .length, // Replace with the actual item count
+                  shrinkWrap: true,
+                  itemCount: jobCategories.length,
                   itemBuilder: (BuildContext context, int index) {
+                    final category = jobCategories[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 7),
-                      child: Text(
-                        job_Categories[index], // Replace with the item text
-                        style: const TextStyle(
-                            fontSize: 16), // Customize text style as needed
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedCategory = category;
+                            textEditingController.text = ""; // Clear text field
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: category == selectedCategory
+                                ? AppColor.upgradeToProDarkMode // Highlight selected category
+                                : Colors.transparent,
+                          ),
+                          child: Text(
+                            category,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: category == selectedCategory
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
@@ -188,7 +202,7 @@ class RoleScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => WorkExperienceScreen(),
+                    builder: (context) => const WorkExperienceScreen(),
                   ),
                 );
               },

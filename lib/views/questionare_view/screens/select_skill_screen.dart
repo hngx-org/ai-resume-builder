@@ -1,12 +1,19 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
-import 'package:ai_resume_builder/views/preview_view/screens/preview_screen.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class select_Skill extends StatelessWidget {
-  select_Skill({super.key});
+class SelectSkillScreen extends StatefulWidget {
+  const SelectSkillScreen({Key? key}) : super(key: key);
+
+  @override
+  _SelectSkillScreenState createState() => _SelectSkillScreenState();
+}
+
+class _SelectSkillScreenState extends State<SelectSkillScreen> {
+  String selectedSkill = ""; // Track the selected skill
+  TextEditingController textEditingController = TextEditingController();
+
   final List<String> skills = [
     'HTML/CSS',
     'Adobe Illustrator',
@@ -15,7 +22,6 @@ class select_Skill extends StatelessWidget {
     'Flutter',
     'Dart',
     'JavaScript',
-    'Leadership',
     'Communication',
     'Problem Solving',
     'Creativity',
@@ -131,12 +137,13 @@ class select_Skill extends StatelessWidget {
                         side: BorderSide.none, // Remove border line
                       ),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: TextField(
-                        cursorColor: Color(0xFF7851A9), // Set cursor color
-                        decoration: InputDecoration(
-                          hintText: 'Search your skills here',
+                        controller: textEditingController,
+                        cursorColor: const Color(0xFF7851A9), // Set cursor color
+                        decoration: const InputDecoration(
+                          hintText: 'Enter your skills here',
                           border: InputBorder.none, // Remove border line
                         ),
                       ),
@@ -152,13 +159,33 @@ class select_Skill extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: skills.length,
                   itemBuilder: (BuildContext context, int index) {
+                    final skill = skills[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 7),
-                      child: Text(
-                        skills[index], // Replace with the item text
-                        style: const TextStyle(
-                            fontSize: 16), // Customize text style as needed
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedSkill = skill;
+                            textEditingController.text = ""; // Clear text field
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: skill == selectedSkill
+                                ? AppColor.upgradeToProDarkMode // Highlight selected skill
+                                : Colors.transparent,
+                          ),
+                          child: Text(
+                            skill,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: skill == selectedSkill
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
@@ -187,11 +214,7 @@ class select_Skill extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PreviewScreen(),
-                  ),
-                );
+                // Implement your logic here when the Next button is pressed
               },
               child: Image.asset(
                 ImagePath.next,
