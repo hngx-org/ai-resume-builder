@@ -5,11 +5,12 @@ class TextInputWidget1 extends StatelessWidget {
   const TextInputWidget1({
     super.key,
     required this.hintText,
-    required this.keyboardType,
+    required this.keyboardType, this.controller,
   });
 
   final String hintText;
   final TextInputType keyboardType;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class TextInputWidget1 extends StatelessWidget {
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
+        controller: controller,
         keyboardType: keyboardType,
         cursorColor: AppColor.bottomNavigationBar,
         style: TextStyle(
