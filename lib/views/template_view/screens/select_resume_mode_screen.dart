@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 class SelectResumeModeScreen extends StatelessWidget {
-  const SelectResumeModeScreen({super.key, required this.data, required this.templateTheme});
+  const SelectResumeModeScreen({super.key, required this.data, this.templateTheme});
 
-  final TemplateTheme templateTheme;
+  final TemplateTheme? templateTheme;
   final TemplateData data;
 
   @override
@@ -22,7 +22,7 @@ class SelectResumeModeScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: SelectResumeTile(data: data, templateTheme: templateTheme,),
+        child: SelectResumeTile(data: data, templateTheme: templateTheme!,),
       ),
     );
   }

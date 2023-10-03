@@ -1,10 +1,11 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
-import 'package:ai_resume_builder/views/preview_view/screens/preview_screen.dart';
 import 'package:ai_resume_builder/views/questionare_view/screens/desired_role.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
+
+import '../screens/resume_from_scratch.dart';
 
 class SelectResumeTile extends StatelessWidget {
   const SelectResumeTile(
@@ -61,12 +62,13 @@ class SelectResumeTile extends StatelessWidget {
               text: 'Create Resume\nFrom Scratch',
               color: AppColor.upgradeToProDarkMode,
               onPressed: () {
-                Navigator.of(context).push(
+                Navigator.push(
+                  context,
                   MaterialPageRoute(
-                    builder: (context) => PreviewScreen(templateTheme: templateTheme,),
+                    builder: (_) => const TemplateThemeNoneScreen(),
                   ),
                 );
-              },
+              },  
             ),
           ],
         ),

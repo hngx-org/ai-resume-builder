@@ -8,13 +8,12 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 List<TemplateTheme> templateThemeList = [
   TemplateTheme.business,
-  TemplateTheme.modern,
-  // TemplateTheme.modern,
+  TemplateTheme.classic,
+  //TemplateTheme.modern,
   TemplateTheme.technical,
   TemplateTheme.business,
-  TemplateTheme.modern,
-  // TemplateTheme.classic,
-  // TemplateTheme.modern,
+  TemplateTheme.classic,
+  //TemplateTheme.modern,
   TemplateTheme.technical,
 ];
 
@@ -39,7 +38,55 @@ class TemplateScreen extends StatelessWidget {
           ),
         ),
       ),
-      //body: const TemplatesTile(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          scrollDirection: Axis.vertical,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Display 2 templates per row
+            childAspectRatio: 0.8,
+            mainAxisSpacing: 8.0,
+            crossAxisSpacing: 12.0,
+          ),
+          itemCount: templateThemeList.length,
+          itemBuilder: (context, index) {
+            TemplateTheme templateTheme = templateThemeList[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => SelectResumeModeScreen(
+                      data: data,
+                      templateTheme: templateTheme,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black), // Black border
+                  borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                ),
+                child: SizedBox(
+                  child: FlutterResumeTemplate(
+                    backgroundColor: Colors.white24,
+                    mode: TemplateMode.readOnlyMode,
+                    templateTheme: templateTheme,
+                    data: data,
+                    imageBoxFit: BoxFit.fill
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+      // body: const TemplatesTile(),
       // body: Padding(
       //   padding: const EdgeInsets.all(8.0),
       //   child: GridView.builder(
@@ -78,49 +125,3 @@ class TemplateScreen extends StatelessWidget {
       //         );
       //       }),
       // ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          scrollDirection: Axis.vertical,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Display 2 templates per row
-            childAspectRatio: 0.8,
-            mainAxisSpacing: 8.0,
-            crossAxisSpacing: 12.0,
-          ),
-          itemCount: templateThemeList.length,
-          itemBuilder: (context, index) {
-            TemplateTheme templateTheme = templateThemeList[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => SelectResumeModeScreen(
-                      data: data,
-                      templateTheme: templateTheme,
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black), // Black border
-                  borderRadius: BorderRadius.circular(8.0), // Rounded corners
-                ),
-                child: SizedBox(
-                  child: FlutterResumeTemplate(
-                    backgroundColor: Colors.white24,
-                    mode: TemplateMode.readOnlyMode,
-                    templateTheme: templateTheme,
-                    data: data,
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}

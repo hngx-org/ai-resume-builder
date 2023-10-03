@@ -3,8 +3,18 @@ import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePageScreen extends StatelessWidget {
-  const ProfilePageScreen({super.key});
+import '../../landing-signup-signin_view/screens/landing_page.dart';
+
+class ProfilePageScreen extends StatefulWidget {
+  const ProfilePageScreen({super.key, });
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _ProfilePageScreenState createState() => _ProfilePageScreenState();
+}
+
+class _ProfilePageScreenState extends State<ProfilePageScreen> {
+  bool isPaid = false; // Initialize as false (free plan)
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +34,22 @@ class ProfilePageScreen extends StatelessWidget {
               children: [
                 Stack(
                   children: [
+                    const SizedBox(height: 15),
                     Container(
                       height: 80,
                       width: double.infinity,
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: AppColor.upgradeToProLightMode,
+                        color: isPaid
+                            ? AppColor.createResumeWithAI
+                            : AppColor.upgradeToProLightMode,
                       ),
-                      child: const Text(
-                        "Upgrade to a pro account today!",
-                        style: TextStyle(
+                      child: Text(
+                        isPaid
+                            ? "Hurray you are already a pro user!"
+                            : "Upgrade to a pro account today!",
+                        style: const TextStyle(
                           color: Colors.black,
                           fontFamily: "Inter",
                           fontWeight: FontWeight.w700,
@@ -63,7 +78,8 @@ class ProfilePageScreen extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: AppColor.profileDetailsCon,
@@ -100,35 +116,62 @@ class ProfilePageScreen extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Theme: Light",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "Inter",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Switch(
-                  value: false,
-                  onChanged: (value) {},
-                ),
+                // Add other profile details here
               ],
             ),
             const SizedBox(
               height: 20,
             ),
-            Text(
-              "Logout",
-              style: TextStyle(
-                color: AppColor.logOutText,
-                fontSize: 14,
-                fontFamily: "Inter",
+            ElevatedButton(
+              onPressed: () {
+                // Toggle the user's plan (free/pro) when the button is clicked
+                setState(() {
+                  isPaid = !isPaid;
+                });
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  isPaid ? Colors.red : Colors.green, // Change button color
+                ),
               ),
-            )
+              child: Text(
+                isPaid ? "Switch to Free Plan" : "Switch to Pro Plan",
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            InkWell(
+              onTap: () {
+              // Navigate to a new screen without the back button
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return const LandingPageView(); // Replace with your logout screen
+                  },
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return child;
+                  },
+                ),
+              );
+            },
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                  color: AppColor.logOutText,
+                  fontSize: 14,
+                  fontFamily: "Inter",
+                ),
+              ),
+            ),
           ],
         ),
       ),
