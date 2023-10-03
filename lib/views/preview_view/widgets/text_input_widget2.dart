@@ -1,16 +1,17 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:flutter/material.dart';
 
-class TextInputWidget1 extends StatelessWidget {
-  const TextInputWidget1({
+class TextInputWidget2 extends StatelessWidget {
+  const TextInputWidget2({
     super.key,
      this.hintText,
-    required this.keyboardType, this.controller,
+    required this.keyboardType, this.controller, this.onChanged,
   });
 
   final String? hintText;
   final TextInputType keyboardType;
   final TextEditingController? controller;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class TextInputWidget1 extends StatelessWidget {
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
+        onChanged: onChanged!,
         controller: controller,
         keyboardType: keyboardType,
         cursorColor: AppColor.bottomNavigationBar,

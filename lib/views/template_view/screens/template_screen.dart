@@ -8,12 +8,13 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 List<TemplateTheme> templateThemeList = [
   TemplateTheme.business,
-  TemplateTheme.classic,
- // TemplateTheme.modern,
+  TemplateTheme.modern,
+  // TemplateTheme.modern,
   TemplateTheme.technical,
   TemplateTheme.business,
-  TemplateTheme.classic,
- // TemplateTheme.modern,
+  TemplateTheme.modern,
+  // TemplateTheme.classic,
+  // TemplateTheme.modern,
   TemplateTheme.technical,
 ];
 
@@ -82,15 +83,13 @@ class TemplateScreen extends StatelessWidget {
         child: GridView.builder(
           scrollDirection: Axis.vertical,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+            crossAxisCount: 2, // Display 2 templates per row
             childAspectRatio: 0.8,
             mainAxisSpacing: 8.0,
             crossAxisSpacing: 12.0,
           ),
-          itemCount: 4,
+          itemCount: templateThemeList.length,
           itemBuilder: (context, index) {
-            // final randomThemeIndex =
-            //     Random().nextInt(templateThemeList.length);
             TemplateTheme templateTheme = templateThemeList[index];
             return GestureDetector(
               onTap: () {
@@ -104,12 +103,18 @@ class TemplateScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: SizedBox(
-                child: FlutterResumeTemplate(
-                  backgroundColor: Colors.white,
-                  mode: TemplateMode.readOnlyMode,
-                  templateTheme: templateTheme,
-                  data: data,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black), // Black border
+                  borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                ),
+                child: SizedBox(
+                  child: FlutterResumeTemplate(
+                    backgroundColor: Colors.white24,
+                    mode: TemplateMode.readOnlyMode,
+                    templateTheme: templateTheme,
+                    data: data,
+                  ),
                 ),
               ),
             );
