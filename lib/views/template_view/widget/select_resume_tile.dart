@@ -1,5 +1,6 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/views/preview_view/screens/preview_screen.dart';
 import 'package:ai_resume_builder/views/questionare_view/screens/desired_role.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class SelectResumeTile extends StatelessWidget {
                     builder: (_) => const TemplateThemeNoneScreen(),
                   ),
                 );
-              },
+              },  
             ),
           ],
         ),
