@@ -8,12 +8,13 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 List<TemplateTheme> templateThemeList = [
   TemplateTheme.business,
-  TemplateTheme.classic,
- // TemplateTheme.modern,
+  TemplateTheme.modern,
+  // TemplateTheme.modern,
   TemplateTheme.technical,
   TemplateTheme.business,
-  TemplateTheme.classic,
- // TemplateTheme.modern,
+  TemplateTheme.modern,
+  // TemplateTheme.classic,
+  // TemplateTheme.modern,
   TemplateTheme.technical,
 ];
 
