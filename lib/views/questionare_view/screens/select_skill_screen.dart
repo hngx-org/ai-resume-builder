@@ -1,4 +1,4 @@
-
+import 'package:ai_resume_builder/views/preview_view/screens/preview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
@@ -97,7 +97,11 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
             padding: const EdgeInsets.only(right: 18),
             child: InkWell(
               onTap: () {
-                // Implement your logic here when the Next button is pressed
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PreviewScreen(),
+                  ),
+                );
               },
               child: Image.asset(
                 ImagePath.next,
@@ -171,7 +175,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                       onTap: () {
                         setState(() {
                           selectedSkill = skill;
-                          textEditingController.text = ""; // Clear text field
+                          textEditingController.text = skill;
                         });
                       },
                       child: Container(
@@ -222,7 +226,11 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
             ),
             InkWell(
               onTap: () {
-                // Implement your logic here when the Next button is pressed
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PreviewScreen(),
+                  ),
+                );
               },
               child: Image.asset(
                 ImagePath.next,
