@@ -17,7 +17,7 @@ class PreviewScreen extends ConsumerStatefulWidget {
 }
 
 class _PreviewScreenState extends ConsumerState<PreviewScreen> {
-// String fullName = 'Alicia Smith';
+String fullName = 'Alicia Smith';
 //  late String fullName;
 
   @override
@@ -25,7 +25,6 @@ class _PreviewScreenState extends ConsumerState<PreviewScreen> {
     // final fullName = ref.watch(fullNameProvider.notifier).state;
     // final fullName = ref.watch(fullNameProvider.notifier).state;
 
-    String fullName = ref.watch(fullNameProvider.notifier).state;
 
     const String workExperienceCompany1 = '''
 Responsibilities:
@@ -206,16 +205,9 @@ I thrive in collaborative environments and enjoy working closely with cross-func
         //   }
         // },
         onPressed: () async {
-          final result = await Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const EditResumeScreen(),
-            ),
-          );
-
-          // Update the state in PreviewScreen if result is not null
-          if (result != null) {
-              fullName = result;
-          }
+              builder: (context) => EditResumeScreen(fullName: fullName,),
+            );
         },
         backgroundColor: AppColor.upgradeToProDarkMode,
         child: const Icon(

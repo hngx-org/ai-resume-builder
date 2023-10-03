@@ -1,51 +1,27 @@
 import 'package:ai_resume_builder/constant/colors.dart';
-import 'package:ai_resume_builder/views/preview_view/widgets/text_input_widget2.dart';
+import 'package:ai_resume_builder/views/preview_view/widgets/edit_screen_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:provider/provider.dart';
 
-final fullNameProvider = StateProvider<String>((ref) => "Alicia Sm");
+class EditResumeScreen extends StatefulWidget {
+  const EditResumeScreen({super.key, required this.fullName});
 
-class EditResumeScreen extends ConsumerStatefulWidget {
-  const EditResumeScreen({super.key});
+  final String fullName;
 
   @override
-  ConsumerState<EditResumeScreen> createState() => _EditResumeScreenState();
+  State<EditResumeScreen> createState() => _EditResumeScreenState();
 }
 
-class _EditResumeScreenState extends ConsumerState<EditResumeScreen> {
-  // TextEditingController fnController = TextEditingController();
-  // late String fullName;
-
-  // // @override
-  // // void initState() {
-  // //   super.initState();
-  // //   // fullName = widget.fullName;
-  // //   fnController.text = ref
-  // //       .watch(fullNameProvider.notifier)
-  // //       .state; // Set the initial value of the controller
-  // // }
-
-  // @override
-  // void didChangeDependencies() {
-  //   // TODO: implement didChangeDependencies
-  //   super.didChangeDependencies();
-
-  //   fnController.text = ref
-  //       .watch(fullNameProvider.notifier)
-  //       .state;
-  // }
+class _EditResumeScreenState extends State<EditResumeScreen> {
 
   TextEditingController fnController = TextEditingController();
-
+  late String fullName;
   @override
-  void initState() {
-    super.initState();
-    fnController.text = ref.read(fullNameProvider.notifier).state;
-  }
+  Widget build(BuildContext context) {
+    String fullName = widget.fullName;
 
-      void _sendDataBack(BuildContext context) {
-      // String finalFullName = fnController.text;
+    TextEditingController fnController = TextEditingController(text: fullName);
+
+    void _sendDataBack(BuildContext context) {
       String finalFullName = fnController.text;
 
       if (finalFullName == "" || finalFullName == " ") {
@@ -76,34 +52,14 @@ class _EditResumeScreenState extends ConsumerState<EditResumeScreen> {
               });
         });
       } else {
-        // setState(() {
-        //   fullName = finalFullName;
-        // });
-
-        // Navigator.pop(
-        //   context,
-        //   [
-        //     finalFullName,
-        //   ],
-        // );
-
-
-        // context.read().state = finalFullName;
-
-        // ref.read(fullNameProvider.notifier).state = finalFullName;
-
-        // Close the screen
-        Navigator.pop(context, finalFullName);
+        Navigator.pop(
+          context,
+          [
+            finalFullName,
+          ],
+        );
       }
     }
-
-  @override
-  Widget build(BuildContext context) {
-    // String fullName = widget.fullName;
-
-    // TextEditingController fnController = TextEditingController(text: fullName);
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -146,7 +102,7 @@ class _EditResumeScreenState extends ConsumerState<EditResumeScreen> {
                   keyboardType: TextInputType.text,
                   controller: fnController,
                   onChanged: (value) {
-                    // fullName = value;
+                    fullName = value;
                   },
                 ),
               ],
@@ -158,46 +114,3 @@ class _EditResumeScreenState extends ConsumerState<EditResumeScreen> {
   }
 }
 
-class EditScreenField extends StatelessWidget {
-  const EditScreenField({
-    super.key,
-    required this.title,
-    required this.keyboardType,
-    this.controller,
-    this.onChanged,
-  });
-
-  final String title;
-  final TextInputType keyboardType;
-  final TextEditingController? controller;
-  final void Function(String)? onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 15,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w800,
-            color: Colors.black,
-          ),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        TextInputWidget2(
-          keyboardType: keyboardType,
-          controller: controller,
-          onChanged: onChanged,
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-      ],
-    );
-  }
-}
