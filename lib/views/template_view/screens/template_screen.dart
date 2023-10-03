@@ -38,40 +38,41 @@ class TemplateScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
-            scrollDirection: Axis.vertical,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 12.0,
-            ),
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              // final randomThemeIndex =
-              //     Random().nextInt(templateThemeList.length);
-              TemplateTheme templateTheme = templateThemeList[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => SelectResumeModeScreen(
-                        data: data,
-                        templateTheme: templateTheme,
-                      ),
+          scrollDirection: Axis.vertical,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.8,
+            mainAxisSpacing: 8.0,
+            crossAxisSpacing: 12.0,
+          ),
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            // final randomThemeIndex =
+            //     Random().nextInt(templateThemeList.length);
+            TemplateTheme templateTheme = templateThemeList[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => SelectResumeModeScreen(
+                      data: data,
+                      templateTheme: templateTheme,
                     ),
-                  );
-                },
-                child: SizedBox(
-                  child: FlutterResumeTemplate(
-                    backgroundColor: Colors.white,
-                    mode: TemplateMode.readOnlyMode,
-                    templateTheme: templateTheme,
-                    data: data,
                   ),
+                );
+              },
+              child: SizedBox(
+                child: FlutterResumeTemplate(
+                  backgroundColor: Colors.white,
+                  mode: TemplateMode.readOnlyMode,
+                  templateTheme: templateTheme,
+                  data: data,
                 ),
-              );
-            }),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
