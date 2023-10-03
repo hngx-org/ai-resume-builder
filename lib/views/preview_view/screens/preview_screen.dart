@@ -181,18 +181,39 @@ I thrive in collaborative environments and enjoy working closely with cross-func
           ),
         ],
       ),
+      // body: Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      //   child: SingleChildScrollView(
+      //     child: SizedBox(
+      //       child: FlutterResumeTemplate(
+      //         mode: TemplateMode.readOnlyMode,
+      //         templateTheme: widget.templateTheme!,
+      //         data: editableData,
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: SingleChildScrollView(
           child: SizedBox(
-            child: FlutterResumeTemplate(
-              mode: TemplateMode.readOnlyMode,
-              templateTheme: widget.templateTheme!,
-              data: editableData,
-            ),
+            child: widget.templateTheme != null
+                ? FlutterResumeTemplate(
+                    mode: TemplateMode.readOnlyMode,
+                    templateTheme: widget.templateTheme!,
+                    data: editableData,
+                  )
+                : const Center(
+                    // Handle the case when templateTheme is null (you can customize this)
+                    child: Text(
+                      'Template theme is null',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
           ),
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         // onPressed: () async{
         //  final result = await Navigator.of(context).push(
@@ -214,7 +235,7 @@ I thrive in collaborative environments and enjoy working closely with cross-func
 
           // Update the state in PreviewScreen if result is not null
           if (result != null) {
-              fullName = result;
+            fullName = result;
           }
         },
         backgroundColor: AppColor.upgradeToProDarkMode,

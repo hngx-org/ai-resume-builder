@@ -86,8 +86,7 @@ class TemplateScreen extends StatelessWidget {
   }
 }
 
-
-      //body: const TemplatesTile(),
+      // body: const TemplatesTile(),
       // body: Padding(
       //   padding: const EdgeInsets.all(8.0),
       //   child: GridView.builder(
