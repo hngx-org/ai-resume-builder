@@ -4,6 +4,8 @@ import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
 
+import '../../template_view/screens/resume_edit.dart';
+
 class SelectSkillScreen extends StatefulWidget {
   const SelectSkillScreen({Key? key}) : super(key: key);
 
@@ -99,7 +101,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const PreviewScreen(),
+                    builder: (context) =>  PdfCreationPage(),
                   ),
                 );
               },
@@ -228,7 +230,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const PreviewScreen(),
+                    builder: (context) => PdfCreationPage(),
                   ),
                 );
               },

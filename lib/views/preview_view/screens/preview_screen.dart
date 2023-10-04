@@ -1,30 +1,31 @@
-import 'package:ai_resume_builder/constant/colors.dart';
-import 'package:ai_resume_builder/constant/image_path.dart';
-import 'package:ai_resume_builder/views/preview_view/screens/edit_resume_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:ai_resume_builder/constant/colors.dart';
+// import 'package:ai_resume_builder/constant/image_path.dart';
+// import 'package:ai_resume_builder/views/preview_view/screens/edit_resume_screen.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_resume_template/flutter_resume_template.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// final fullNameProvider = StateProvider<String>((ref) => "Alicia Sm");
+// // final fullNameProvider = StateProvider<String>((ref) => "Alicia Sm");
 
-class PreviewScreen extends ConsumerStatefulWidget {
-  const PreviewScreen({super.key});
+// class PreviewScreen extends ConsumerStatefulWidget {
+//   const PreviewScreen({super.key, this.templateTheme});
 
-  // final TemplateTheme? templateTheme;
+//   final TemplateTheme? templateTheme;
 
-  @override
-  ConsumerState<PreviewScreen> createState() => _PreviewScreenState();
-}
+//   @override
+//   ConsumerState<PreviewScreen> createState() => _PreviewScreenState();
+// }
 
-class _PreviewScreenState extends ConsumerState<PreviewScreen> {
-// String fullName = 'Alicia Smith';
-//  late String fullName;
+// class _PreviewScreenState extends ConsumerState<PreviewScreen> {
+// // String fullName = 'Alicia Smith';
+// //  late String fullName;
 
-  @override
-  Widget build(BuildContext context) {
-    // final fullName = ref.watch(fullNameProvider.notifier).state;
-    // final fullName = ref.watch(fullNameProvider.notifier).state;
+//   @override
+//   Widget build(BuildContext context) {
+//     // final fullName = ref.watch(fullNameProvider.notifier).state;
+//     // final fullName = ref.watch(fullNameProvider.notifier).state;
 
-    String fullName = ref.watch(fullNameProvider.notifier).state;
+//     String fullName = ref.watch(fullNameProvider.notifier).state;
 
 //     const String workExperienceCompany1 = '''
 // Responsibilities:
@@ -153,106 +154,105 @@ class _PreviewScreenState extends ConsumerState<PreviewScreen> {
 //         backgroundImage:
 //             'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const Text(
-          'Preview',
-          style: TextStyle(
-            fontSize: 25.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Inter',
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {},
-            child: Image.asset(
-              ImagePath.download,
-              width: 22,
-              height: 22,
-            ),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-        ],
-      ),
-      // body: Padding(
-      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      //   child: SingleChildScrollView(
-      //     child: SizedBox(
-      //       child: FlutterResumeTemplate(
-      //         mode: TemplateMode.readOnlyMode,
-      //         templateTheme: widget.templateTheme!,
-      //         data: editableData,
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        // child: SingleChildScrollView(
-        //   child: SizedBox(
-        //     child: widget.templateTheme != null
-        //         ? FlutterResumeTemplate(
-        //             mode: TemplateMode.readOnlyMode,
-        //             templateTheme: widget.templateTheme!,
-        //             data: editableData,
-        //           )
-        //         : const Center(
-        //             // Handle the case when templateTheme is null (you can customize this)
-        //             child: Text(
-        //               'Template theme is null',
-        //               style: TextStyle(fontSize: 16),
-        //             ),
-        //           ),
-        //   ),
-        // ),
-        child: Center(child: Text("Preview Screen"),),
-      ),
+//     return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: Colors.black,
+//         elevation: 0.0,
+//         centerTitle: true,
+//         title: const Text(
+//           'Preview',
+//           style: TextStyle(
+//             fontSize: 25.0,
+//             fontWeight: FontWeight.bold,
+//             fontFamily: 'Inter',
+//           ),
+//         ),
+//         actions: [
+//           GestureDetector(
+//             onTap: () {},
+//             child: Image.asset(
+//               ImagePath.download,
+//               width: 22,
+//               height: 22,
+//             ),
+//           ),
+//           const SizedBox(
+//             width: 15,
+//           ),
+//         ],
+//       ),
+//       // body: Padding(
+//       //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+//       //   child: SingleChildScrollView(
+//       //     child: SizedBox(
+//       //       child: FlutterResumeTemplate(
+//       //         mode: TemplateMode.readOnlyMode,
+//       //         templateTheme: widget.templateTheme!,
+//       //         data: editableData,
+//       //       ),
+//       //     ),
+//       //   ),
+//       // ),
+//       body: Padding(
+//         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+//         child: SingleChildScrollView(
+//           child: SizedBox(
+//             child: widget.templateTheme != null
+//                 ? FlutterResumeTemplate(
+//                     mode: TemplateMode.readOnlyMode,
+//                     templateTheme: widget.templateTheme!,
+//                     data: editableData,
+//                   )
+//                 : const Center(
+//                     // Handle the case when templateTheme is null (you can customize this)
+//                     child: Text(
+//                       'Template theme is null',
+//                       style: TextStyle(fontSize: 16),
+//                     ),
+//                   ),
+//           ),
+//         ),
+//       ),
 
-      floatingActionButton: FloatingActionButton(
-        // onPressed: () async{
-        //  final result = await Navigator.of(context).push(
-        //     MaterialPageRoute(
-        //       builder: (context) => const EditResumeScreen(),
-        //     ),
-        //   );
+//       floatingActionButton: FloatingActionButton(
+//         // onPressed: () async{
+//         //  final result = await Navigator.of(context).push(
+//         //     MaterialPageRoute(
+//         //       builder: (context) => const EditResumeScreen(),
+//         //     ),
+//         //   );
 
-        //   if(result != null){
-        //     context.read(fullNameProvider).state = result;
-        //   }
-        // },
-        onPressed: () async {
-          final result = await Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const EditResumeScreen(),
-            ),
-          );
+//         //   if(result != null){
+//         //     context.read(fullNameProvider).state = result;
+//         //   }
+//         // },
+//         onPressed: () async {
+//           final result = await Navigator.of(context).push(
+//             MaterialPageRoute(
+//               builder: (context) => const EditResumeScreen(),
+//             ),
+//           );
 
-          // Update the state in PreviewScreen if result is not null
-          if (result != null) {
-            fullName = result;
-          }
-        },
-        backgroundColor: AppColor.upgradeToProDarkMode,
-        child: const Icon(
-          Icons.edit,
-          size: 25,
-        ),
-      ),
-    );
-  }
+//           // Update the state in PreviewScreen if result is not null
+//           if (result != null) {
+//             fullName = result;
+//           }
+//         },
+//         backgroundColor: AppColor.upgradeToProDarkMode,
+//         child: const Icon(
+//           Icons.edit,
+//           size: 25,
+//         ),
+//       ),
+//     );
+//   }
 
-  Widget _previewResume() {
-    return Image.asset(
-      ImagePath.coloredResume,
-      height: 400,
-      width: double.maxFinite,
-      fit: BoxFit.fill,
-    );
-  }
-}
+//   Widget _previewResume() {
+//     return Image.asset(
+//       ImagePath.coloredResume,
+//       height: 400,
+//       width: double.maxFinite,
+//       fit: BoxFit.fill,
+//     );
+//   }
+// }
