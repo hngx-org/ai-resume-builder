@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/image_path.dart';
@@ -27,6 +28,7 @@ class TemplateScreen extends StatelessWidget {
             ),
           ),
         ),
+
         body: Column(
           children: [
             const SizedBox(
