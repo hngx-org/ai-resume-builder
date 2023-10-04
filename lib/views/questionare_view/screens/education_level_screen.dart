@@ -1,8 +1,8 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
-import 'package:ai_resume_builder/views/questionare_view/screens/select_skill_screen.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
 import 'package:flutter/material.dart';
+import 'Select_skill_screen.dart';
 
 class EducationLevelScreen extends StatefulWidget {
   const EducationLevelScreen({Key? key}) : super(key: key);
@@ -171,24 +171,20 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
                     return InkWell(
                       onTap: () {
                         setState(() {
-                          selectedEducation = selected ? "" : education[index];
+                          selectedEducation =
+                              selected ? "" : education[index];
                           textEditingController.text = selectedEducation;
                         });
                       },
                       child: Container(
-                        color: selected
-                            ? AppColor.upgradeToProDarkMode
-                            : Colors.transparent,
+                        color: selected ? AppColor.upgradeToProDarkMode : Colors.transparent,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 25,
-                            vertical: 10,
-                          ),
+                              horizontal: 25, vertical: 7),
                           child: Text(
                             education[index],
                             style: TextStyle(
                               fontSize: 16,
-                              fontFamily: "Inter",
                               color: selected ? Colors.white : Colors.black,
                             ),
                           ),
