@@ -1,8 +1,11 @@
-import 'package:ai_resume_builder/views/template_view/widget/select_resume_tile.dart';
 import 'package:flutter/material.dart';
 
 class SelectResumeModeScreen extends StatelessWidget {
-  const SelectResumeModeScreen({super.key});
+  const SelectResumeModeScreen(
+      {super.key});
+
+  // final TemplateTheme? templateTheme;
+  // final TemplateData data;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +20,11 @@ class SelectResumeModeScreen extends StatelessWidget {
               fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
         ),
       ),
-      body: const SingleChildScrollView(
-        child: SelectResumeTile(),
+      // body: SingleChildScrollView(
+      //   child: SelectResumeTile(data: data, templateTheme: templateTheme!,),
+      // ),
+      body: const Center(
+        child: Text("Select Resume Mode"),
       ),
     );
   }

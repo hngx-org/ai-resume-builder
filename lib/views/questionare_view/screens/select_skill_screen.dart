@@ -1,4 +1,4 @@
-
+import 'package:ai_resume_builder/views/preview_view/screens/preview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
@@ -97,7 +97,11 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
             padding: const EdgeInsets.only(right: 18),
             child: InkWell(
               onTap: () {
-                // Implement your logic here when the Next button is pressed
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PreviewScreen(),
+                  ),
+                );
               },
               child: Image.asset(
                 ImagePath.next,
@@ -147,7 +151,8 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: TextField(
                         controller: textEditingController,
-                        cursorColor: const Color(0xFF7851A9), // Set cursor color
+                        cursorColor:
+                            const Color(0xFF7851A9), // Set cursor color
                         decoration: const InputDecoration(
                           hintText: 'Enter your skills here',
                           border: InputBorder.none, // Remove border line
@@ -166,33 +171,31 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                   itemCount: skills.length,
                   itemBuilder: (BuildContext context, int index) {
                     final skill = skills[index];
-                    final isSelected = skill == selectedSkill;
-
                     return InkWell(
                       onTap: () {
                         setState(() {
-                          if (isSelected) {
-                            selectedSkill = ""; // Deselect if already selected
-                            textEditingController.clear();
-                          } else {
-                            selectedSkill = skill;
-                            textEditingController.text = skill;
-                          }
+                          selectedSkill = skill;
+                          textEditingController.text = skill;
                         });
                       },
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: isSelected ? AppColor.upgradeToProDarkMode : Colors.transparent,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 25,
+                          vertical: 10,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 7),
-                          child: Text(
-                            skill,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: isSelected ? Colors.white : Colors.black,
-                            ),
+                        decoration: BoxDecoration(
+                          color: skill == selectedSkill
+                              ? AppColor
+                                  .upgradeToProDarkMode // Highlight selected skill
+                              : Colors.transparent,
+                        ),
+                        child: Text(
+                          skill,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: skill == selectedSkill
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),
@@ -223,7 +226,11 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
             ),
             InkWell(
               onTap: () {
-                // Implement your logic here when the Next button is pressed
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PreviewScreen(),
+                  ),
+                );
               },
               child: Image.asset(
                 ImagePath.next,

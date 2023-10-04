@@ -4,48 +4,73 @@ import 'package:ai_resume_builder/views/questionare_view/screens/desired_role.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/resume_from_scratch.dart';
+
 class SelectResumeTile extends StatelessWidget {
-  const SelectResumeTile({super.key});
+  const SelectResumeTile(
+      {super.key});
+
+  // final TemplateData data;
+  // final TemplateTheme templateTheme;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
-      child: Column(
-        children: [
-          Image.asset(
-            ImagePath.coloredResume,
-            height: 400,
-            width: double.maxFinite,
-            fit: BoxFit.fill,
-            filterQuality: FilterQuality.high,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          _chooseToCreate(
-            image: ImagePath.chatGpt,
-            text: 'Create Resume\nWith Ai',
-            color: AppColor.createResumeWithAI,
-            subText: 'Recommended',
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => RoleScreen(),
-                ),
-              );
-            },
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          _chooseToCreate(
-            image: ImagePath.pencil,
-            text: 'Create Resume\nFrom Scratch',
-            color: AppColor.upgradeToProDarkMode,
-            onPressed: () {},
-          ),
-        ],
+    return Container(
+      color: AppColor.whitishBgColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
+        child: Column(
+          children: [
+            Image.asset(
+              ImagePath.coloredResume,
+              height: 400,
+              width: double.maxFinite,
+              fit: BoxFit.fill,
+              filterQuality: FilterQuality.high,
+            ),
+            // SingleChildScrollView(
+            //   child: SizedBox(
+            //     child: FlutterResumeTemplate(
+            //       mode: TemplateMode.readOnlyMode,
+            //       templateTheme: templateTheme,
+            //       data: data,
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 12,
+            // ),
+            _chooseToCreate(
+              image: ImagePath.chatGpt,
+              text: 'Create Resume\nWith Ai',
+              color: AppColor.createResumeWithAI,
+              subText: 'Recommended',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const RoleScreen(),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            _chooseToCreate(
+              image: ImagePath.pencil,
+              text: 'Create Resume\nFrom Scratch',
+              color: AppColor.upgradeToProDarkMode,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TemplateThemeNoneScreen(),
+                  ),
+                );
+              },  
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -60,7 +85,7 @@ class SelectResumeTile extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 18),
-        height: 50,
+        height: 55,
         width: double.maxFinite,
         decoration: BoxDecoration(
           color: color,
