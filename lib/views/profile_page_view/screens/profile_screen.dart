@@ -92,8 +92,7 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
             ),
             Container(
               width: double.infinity,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: AppColor.profileDetailsCon,
@@ -162,7 +161,7 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
               height: 15,
             ),
             InkWell(
-              onTap: () {
+              onTap: () async {
                 // Navigate to a new screen without the back button
 
                 // Future user = await authRepository.getUser();
