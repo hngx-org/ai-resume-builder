@@ -8,8 +8,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
+    
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Resume Ai builder',
@@ -18,3 +21,15 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+// class UserDetailsProvider extends ChangeNotifier {
+//   UserDetails? _userDetails;
+
+//   UserDetails? get userDetails => _userDetails;
+
+//   void setUserDetails(UserDetails details) {
+//     _userDetails = details;
+//     notifyListeners();
+//   }
+// }

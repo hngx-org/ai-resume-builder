@@ -8,6 +8,7 @@ class RoleScreen extends StatefulWidget {
   const RoleScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _RoleScreenState createState() => _RoleScreenState();
 }
 
