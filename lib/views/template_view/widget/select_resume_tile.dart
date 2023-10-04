@@ -3,16 +3,15 @@ import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/screens/desired_role.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 import '../screens/resume_from_scratch.dart';
 
 class SelectResumeTile extends StatelessWidget {
   const SelectResumeTile(
-      {super.key, required this.data, required this.templateTheme});
+      {super.key});
 
-  final TemplateData data;
-  final TemplateTheme templateTheme;
+  // final TemplateData data;
+  // final TemplateTheme templateTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +21,22 @@ class SelectResumeTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
         child: Column(
           children: [
-            // Image.asset(
-            //   ImagePath.coloredResume,
-            //   height: 400,
-            //   width: double.maxFinite,
-            //   fit: BoxFit.fill,
-            //   filterQuality: FilterQuality.high,
-            // ),
-            SingleChildScrollView(
-              child: SizedBox(
-                child: FlutterResumeTemplate(
-                  mode: TemplateMode.readOnlyMode,
-                  templateTheme: templateTheme,
-                  data: data,
-                ),
-              ),
+            Image.asset(
+              ImagePath.coloredResume,
+              height: 400,
+              width: double.maxFinite,
+              fit: BoxFit.fill,
+              filterQuality: FilterQuality.high,
             ),
+            // SingleChildScrollView(
+            //   child: SizedBox(
+            //     child: FlutterResumeTemplate(
+            //       mode: TemplateMode.readOnlyMode,
+            //       templateTheme: templateTheme,
+            //       data: data,
+            //     ),
+            //   ),
+            // ),
             // const SizedBox(
             //   height: 12,
             // ),
