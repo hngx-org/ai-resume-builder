@@ -1,21 +1,10 @@
-// import 'package:ai_resume_builder/views/template_view/widget/template_tile.dart';
-
-//import 'package:ai_resume_builder/constant/colors.dart';
-import 'package:ai_resume_builder/views/template_view/data/template_data.dart';
-import 'package:ai_resume_builder/views/template_view/screens/select_resume_mode_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_resume_template/flutter_resume_template.dart';
-
-List<TemplateTheme> templateThemeList = [
-  TemplateTheme.business,
-  TemplateTheme.classic,
-  //TemplateTheme.modern,
-  TemplateTheme.technical,
-  TemplateTheme.business,
-  TemplateTheme.classic,
-  //TemplateTheme.modern,
-  TemplateTheme.technical,
-];
+import '../../../constant/colors.dart';
+import '../../../constant/image_path.dart';
+import '../../questionare_view/screens/desired_role.dart';
+import '../widget/chooseToCreate.dart';
+import 'resume_edit.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class TemplateScreen extends StatelessWidget {
   const TemplateScreen({super.key});
@@ -23,66 +12,107 @@ class TemplateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0.0,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: const Text(
-          'Resume Pro',
-          style: TextStyle(
-            fontSize: 30.0,
-            fontFamily: "Inter",
-            fontWeight: FontWeight.bold,
+        backgroundColor: Colors.black12,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          elevation: 0.0,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: const Text(
+            'Resume Pro',
+            style: TextStyle(
+              fontSize: 30.0,
+              fontFamily: "Inter",
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          scrollDirection: Axis.vertical,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Display 2 templates per row
-            childAspectRatio: 0.8,
-            mainAxisSpacing: 8.0,
-            crossAxisSpacing: 12.0,
-          ),
-          itemCount: templateThemeList.length,
-          itemBuilder: (context, index) {
-            TemplateTheme templateTheme = templateThemeList[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => SelectResumeModeScreen(
-                      data: data,
-                      templateTheme: templateTheme,
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black), // Black border
-                  borderRadius: BorderRadius.circular(8.0), // Rounded corners
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 15,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Craft Your Professional Resume with AI',
+                style: TextStyle(
+                  //color: Colors.white, // Text color
+                  fontSize: 30.0, // Font size
+                  fontWeight: FontWeight.bold, // Bold text
                 ),
-                child: SizedBox(
-                  child: FlutterResumeTemplate(
-                    backgroundColor: Colors.white24,
-                    mode: TemplateMode.readOnlyMode,
-                    templateTheme: templateTheme,
-                    data: data,
-                    imageBoxFit: BoxFit.fill
+              ),
+            ),
+            const SizedBox(height: 30.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                child: DefaultTextStyle(
+                  style:  TextStyle(
+                    fontSize: 17.0,
+                    fontStyle: FontStyle.italic,
+                    color: AppColor.upgradeToProDarkMode,
+                  ),
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Unleash your potential and land your dream job with ease. \n \n Our AI-powered resume builder makes it simple to create impressive resumes that get noticed by employers.',
+                         speed: const Duration(milliseconds: 100),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+            // const Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: Text(
+            //     'Unleash your potential and land your dream job with ease. \n \n Our AI-powered resume builder makes it simple to create impressive resumes that get noticed by employers.',
+            //     style: TextStyle(
+            //         color: Color.fromARGB(255, 109, 101, 196), // Text color
+            //         fontSize: 20.0,
+            //         fontStyle: FontStyle.italic // Font size
+            //         ),
+            //   ),
+            // ),
+            const Expanded(child: SizedBox()),
+            Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+              child: chooseToCreate(
+                image: ImagePath.chatGpt,
+                text: 'Create Resume\nWith Ai',
+                color: AppColor.createResumeWithAI,
+                subText: 'Recommended',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const RoleScreen(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+              child: chooseToCreate(
+                image: ImagePath.pencil,
+                text: 'Create Resume\nFrom Scratch',
+                color: AppColor.upgradeToProDarkMode,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PdfCreationPage(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }
 

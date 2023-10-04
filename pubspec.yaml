@@ -38,9 +38,9 @@ dependencies:
   flutter_svg: ^2.0.5
   # hng_authentication: ^0.0.3
   http: ^1.1.0
-  flutter_resume_template: ^1.2.0
-  flutter_riverpod: ^2.4.2
   provider: ^6.0.5
+  syncfusion_flutter_pdf: ^23.1.38
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +68,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/documents/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
