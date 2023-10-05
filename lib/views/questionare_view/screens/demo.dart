@@ -1,20 +1,45 @@
+
+// ignore_for_file: unused_local_variable
+import 'dart:js';
+import 'package:ai_resume_builder/constant/colors.dart';
+import 'package:ai_resume_builder/constant/random.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hngx_openai/repository/openai_repository.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+import '../../landing-signup-signin_view/screens/cookie_state.dart';
 
-  final String title;
+class AiPdfCreationPage extends StatefulWidget {
+  final String initialText;
+
+   const AiPdfCreationPage({super.key, this.initialText = ''});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  // ignore: library_private_types_in_public_api
+  _PdfCreationPageState createState() => _PdfCreationPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  String _counter = "No Chat";
+class _PdfCreationPageState extends State<AiPdfCreationPage> {
+  TextEditingController textEditingController = TextEditingController();
+  PdfDocument document = PdfDocument();
+  FocusNode focusNode = FocusNode();
+  bool isFocused = false, isFilled = true;
+  Color fillColor = Colors.transparent;
 
-  void _incrementCounter() async {
-    const String userInput = "What is today's date";
+  @override
+  void initState() {
+    super.initState();
+    document = PdfDocument();
+    textEditingController = TextEditingController(text: widget.initialText);
+    focusNode = FocusNode();
+    _incrementCounter(); // Load resume text when the page is created
+  }
+  
+    void _incrementCounter() async {
+     String userInput = "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is $education, the role am appling for is $role, i have $experience years of experience in this field, additional skills are $skill. so help me construct it in full thanks.";
     const String cookie =
         "session=487d97a5-3e43-4502-80d4-9315c3d7bf77.24ZfCu95q06BqVuCUFWuJJoLAgM";
 
@@ -29,36 +54,106 @@ class _MyHomePageState extends State<MyHomePage> {
         await openAI.getChatCompletions(history, userInput, cookie);
 
     setState(() {
-      _counter = aiResponse;
+      textEditingController.text = aiResponse;
     });
+  }
+
+  void _createPdf() async {
+
+    final page = document.pages.add();
+  final graphics = page.graphics;
+
+  final text = textEditingController.text;
+
+  final font = PdfStandardFont(PdfFontFamily.helvetica, 12);
+
+  final layoutFormat = PdfLayoutFormat(layoutType: PdfLayoutType.paginate);
+
+  final bounds = Rect.fromLTWH(0, 0, page.getClientSize().width, -1);
+
+
+    try {
+      final textElement = PdfTextElement(
+    text: text,
+    font: font,
+    brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+  );
+
+  final layoutResult = textElement.draw(
+    page: page,
+    bounds: bounds,
+    format: layoutFormat,
+  );
+
+      final directory = await getExternalStorageDirectory();
+      // Save the document as a file
+      List<int> bytes = await document.save();
+      document.dispose();
+      pdfHandler.saveAndLaunchFile(bytes, 'Output.pdf');
+    } catch (e) {
+      if (kDebugMode) {
+        print('This >>>>>${e.toString()}');
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Hit the plus button to get response from the server',
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(focusNode);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: const Text(
+            'Resume Preview',
+            style: TextStyle(
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Inter',
             ),
-            Text(
-              _counter,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: EditableText(
+              maxLines: 1000,
+              controller: textEditingController,
+              focusNode: focusNode,
+              backgroundCursorColor: Colors.black,
+              cursorColor: Colors.black,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _createPdf,
+          backgroundColor:
+              AppColor.upgradeToProDarkMode, // Change the background color
+          child: const Icon(Icons.save),
+        ),
       ),
     );
   }
 }
+
+
+final sharedData = Provider.of<SharedData>(context as BuildContext);
+
+// Access the shared data
+String education = sharedData.dataFromeducationallevel!;
+String role = sharedData.datafromdesiredrole!;
+String skill = sharedData.datafromselectskill!;
+String experience = sharedData.datafromworkexperience!;
