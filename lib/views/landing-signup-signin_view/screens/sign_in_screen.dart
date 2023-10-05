@@ -2,7 +2,6 @@
 
 // import 'dart:convert';
 
-
 import 'package:ai_resume_builder/constant/brain.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
@@ -43,13 +42,7 @@ class _SignInViewState extends State<SignInView> {
     try {
       final data = await authRepository.signIn(email, password);
 
-      
-
-      
-
       if (data != null) {
-
-
         setState(() {
           isLoading = false; // Set loading to false when sign-up is complete
         });
@@ -74,6 +67,11 @@ class _SignInViewState extends State<SignInView> {
         showSnackbar(context, Colors.red, 'SignIn ERROR');
       }
     } catch (e) {
+      setState(() {
+        isLoading = false; // Set loading to false when the sign in fails
+      });
+
+      showSnackbar(context, Colors.red, 'SignIn ERROR');
       print(e);
     }
   }
