@@ -59,6 +59,8 @@ class _SignUpViewState extends State<SignUpView> {
           isLoading = false; // Set loading to false when the sign up fails
         });
 
+        print(data.cookie.toString());
+
         showSnackbar(context, Colors.black, 'SignUp successful');
         print('sign up Email >>> ${data.email}');
         print('sign up id >>> ${data.id}');
