@@ -1,6 +1,4 @@
-
 // ignore_for_file: unused_local_variable
-import 'dart:js';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/random.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +13,9 @@ import '../../landing-signup-signin_view/screens/cookie_state.dart';
 class AiPdfCreationPage extends StatefulWidget {
   final String initialText;
 
-   const AiPdfCreationPage({super.key, this.initialText = ''});
+  const AiPdfCreationPage(
+      {super.key,
+      this.initialText = "Click on the Refresh Icon to load your Resume"});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -35,55 +35,33 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
     document = PdfDocument();
     textEditingController = TextEditingController(text: widget.initialText);
     focusNode = FocusNode();
-    _incrementCounter(); // Load resume text when the page is created
-  }
-  
-    void _incrementCounter() async {
-     String userInput = "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is $education, the role am appling for is $role, i have $experience years of experience in this field, additional skills are $skill. so help me construct it in full thanks.";
-    const String cookie =
-        "session=487d97a5-3e43-4502-80d4-9315c3d7bf77.24ZfCu95q06BqVuCUFWuJJoLAgM";
-
-    // Instantiate OpenAIRepository
-    OpenAIRepository openAI = OpenAIRepository();
-
-    // For initiating a new chat
-    final aiResponse = await openAI.getChat(userInput, cookie);
-    // For getting chat completions
-    List<String> history = ["What is my name", "How are you today?"];
-    final response =
-        await openAI.getChatCompletions(history, userInput, cookie);
-
-    setState(() {
-      textEditingController.text = aiResponse;
-    });
+    // _incrementCounter(); // Load resume text when the page is created
   }
 
   void _createPdf() async {
-
     final page = document.pages.add();
-  final graphics = page.graphics;
+    final graphics = page.graphics;
 
-  final text = textEditingController.text;
+    final text = textEditingController.text;
 
-  final font = PdfStandardFont(PdfFontFamily.helvetica, 12);
+    final font = PdfStandardFont(PdfFontFamily.helvetica, 12);
 
-  final layoutFormat = PdfLayoutFormat(layoutType: PdfLayoutType.paginate);
+    final layoutFormat = PdfLayoutFormat(layoutType: PdfLayoutType.paginate);
 
-  final bounds = Rect.fromLTWH(0, 0, page.getClientSize().width, -1);
-
+    final bounds = Rect.fromLTWH(0, 0, page.getClientSize().width, -1);
 
     try {
       final textElement = PdfTextElement(
-    text: text,
-    font: font,
-    brush: PdfSolidBrush(PdfColor(0, 0, 0)),
-  );
+        text: text,
+        font: font,
+        brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+      );
 
-  final layoutResult = textElement.draw(
-    page: page,
-    bounds: bounds,
-    format: layoutFormat,
-  );
+      final layoutResult = textElement.draw(
+        page: page,
+        bounds: bounds,
+        format: layoutFormat,
+      );
 
       final directory = await getExternalStorageDirectory();
       // Save the document as a file
@@ -106,6 +84,14 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final sharedData = Provider.of<SharedData>(context);
+
+// Access the shared data
+    String education = sharedData.dataFromeducationallevel!;
+    String role = sharedData.datafromdesiredrole!;
+    String skill = sharedData.datafromselectskill!;
+    String experience = sharedData.datafromworkexperience!;
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(focusNode);
@@ -121,6 +107,36 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
               fontFamily: 'Inter',
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () async {
+                String userInput =
+                    "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is $education, the role am appling for is $role, i have $experience years of experience in this field, additional skills are $skill. so help me construct it in full thanks.";
+                const String cookie =
+                    "session=487d97a5-3e43-4502-80d4-9315c3d7bf77.24ZfCu95q06BqVuCUFWuJJoLAgM";
+
+                // Instantiate OpenAIRepository
+                OpenAIRepository openAI = OpenAIRepository();
+
+                // For initiating a new chat
+                final aiResponse = await openAI.getChat(userInput, cookie);
+                // For getting chat completions
+                List<String> history = [
+                  "What is my name",
+                  "How are you today?"
+                ];
+                final response =
+                    await openAI.getChatCompletions(history, userInput, cookie);
+
+                setState(() {
+                  textEditingController.text = aiResponse;
+                });
+              },
+              icon: const Icon(
+                Icons.refresh,
+              ),
+            ),
+          ],
         ),
         body: Center(
           child: Padding(
@@ -149,11 +165,3 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
   }
 }
 
-
-final sharedData = Provider.of<SharedData>(context as BuildContext);
-
-// Access the shared data
-String education = sharedData.dataFromeducationallevel!;
-String role = sharedData.datafromdesiredrole!;
-String skill = sharedData.datafromselectskill!;
-String experience = sharedData.datafromworkexperience!;

@@ -22,7 +22,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppHeader(
+      appBar: PaymentScreenHeader(
         text: "Upgrade to Pro",
         color: AppColor.upgradeToProLightMode,
         textColor: AppColor.bottomNavigationBar,
@@ -138,12 +138,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             Column(
               children: [
-                pay.googlePay(amountToPay: packagePrice),
+                Container(
+                  color: Colors.black,
+                  child: pay.googlePay(context,
+                      amountToPay: packagePrice, userID: '23',),
+                ),
                 const SizedBox(
                   height: 60,
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

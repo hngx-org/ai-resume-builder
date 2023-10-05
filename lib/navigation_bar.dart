@@ -79,7 +79,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 BottomNavigationBarItem(
                   icon: Image.asset(
                     ImagePath.profileIcon,
-                    color: _currentIndex == 2
+                    color: _currentIndex == 1
                         ? AppColor.selectedItem
                         : Colors.white,
                   ),
