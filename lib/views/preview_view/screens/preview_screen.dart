@@ -1,3 +1,4 @@
+
 // import 'package:ai_resume_builder/constant/colors.dart';
 // import 'package:ai_resume_builder/constant/image_path.dart';
 // import 'package:ai_resume_builder/views/preview_view/screens/edit_resume_screen.dart';
@@ -7,10 +8,12 @@
 
 // // final fullNameProvider = StateProvider<String>((ref) => "Alicia Sm");
 
+
 // class PreviewScreen extends ConsumerStatefulWidget {
 //   const PreviewScreen({super.key, this.templateTheme});
 
 //   final TemplateTheme? templateTheme;
+
 
 //   @override
 //   ConsumerState<PreviewScreen> createState() => _PreviewScreenState();
@@ -153,6 +156,7 @@
 //             'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
 //         backgroundImage:
 //             'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+
 
 //     return Scaffold(
 //       appBar: AppBar(

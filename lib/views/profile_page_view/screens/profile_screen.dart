@@ -1,12 +1,16 @@
+// ignore_for_file: avoid_print
+
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
 import 'package:flutter/material.dart';
-
-import '../../landing-signup-signin_view/screens/landing_page.dart';
+import 'package:hng_authentication/authentication.dart';
 
 class ProfilePageScreen extends StatefulWidget {
-  const ProfilePageScreen({super.key, });
+  const ProfilePageScreen({
+    super.key,
+  });
 
   @override
   // ignore: library_private_types_in_public_api
@@ -18,6 +22,16 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authRepository = Authentication();
+    final userEmail = authRepository.getUser();
+    // final userDetails = Provider.of<UserDetailsProvider>(context).userDetails;
+
+    // if (userDetails != null) {
+    //   userEmail = userDetails.useremail;
+
+    //   print(userEmail);
+    // }
+
     return Scaffold(
       appBar: const CustomAppHeader(
         text: "Profile",
@@ -78,8 +92,7 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
             ),
             Container(
               width: double.infinity,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: AppColor.profileDetailsCon,
@@ -103,7 +116,7 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                     height: 3,
                   ),
                   Text(
-                    "johndoe911@gmail.com",
+                    "johndoe@hmail.com",
                     style: TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w500,
@@ -148,21 +161,36 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
               height: 15,
             ),
             InkWell(
-              onTap: () {
-              // Navigate to a new screen without the back button
-              Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return const LandingPageView(); // Replace with your logout screen
-                  },
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    return child;
-                  },
-                ),
-              );
-            },
+              onTap: () async {
+                // Navigate to a new screen without the back button
+
+                // Future user = await authRepository.getUser();
+
+                try {
+                  print("1");
+                  authRepository.logout(userEmail.toString());
+                  print("2");
+                  print(userEmail.toString());
+
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return const LandingPageView(); // Replace with your logout screen
+                      },
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return child;
+                      },
+                    ),
+                    (route) => false,
+                  );
+
+                  print("success");
+                } catch (e) {
+                  print(e.toString());
+                }
+              },
               child: Text(
                 "Logout",
                 style: TextStyle(
