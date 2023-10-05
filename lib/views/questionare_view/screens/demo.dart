@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/random.dart';
+import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hngx_openai/repository/openai_repository.dart';
@@ -24,6 +25,8 @@ class AiPdfCreationPage extends StatefulWidget {
 
 class _PdfCreationPageState extends State<AiPdfCreationPage> {
   TextEditingController textEditingController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   PdfDocument document = PdfDocument();
   FocusNode focusNode = FocusNode();
   bool isFocused = false, isFilled = true;
@@ -85,6 +88,10 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
   @override
   Widget build(BuildContext context) {
     final sharedData = Provider.of<SharedData>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
+    final email = emailController.text;
+    final password = passwordController.text;
+    final data = authRepository.signIn(email, password);
 
 // Access the shared data
     String education = sharedData.dataFromeducationallevel!;
@@ -164,4 +171,3 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
     );
   }
 }
-

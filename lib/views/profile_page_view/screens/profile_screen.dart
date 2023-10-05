@@ -1,11 +1,13 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
 import 'package:ai_resume_builder/views/payment_view/screens/payment_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePageScreen extends StatefulWidget {
   const ProfilePageScreen({
@@ -37,6 +39,8 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       appBar: const CustomAppHeader(
         text: "Profile",
@@ -119,9 +123,9 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "John Doe",
-                    style: TextStyle(
+                  Text(
+                    authProvider.user!.name.toString().toUpperCase(),
+                    style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w900,
                       fontSize: 20,
@@ -131,8 +135,8 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                     height: 3,
                   ),
                   Text(
-                    userEmail ??
-                        "", // Use userEmail if not null, otherwise use an empty string
+                    authProvider.user!
+                        .email, // Use userEmail if not null, otherwise use an empty string
                     style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w500,
@@ -154,25 +158,25 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Toggle the user's plan (free/pro) when the button is clicked
-                setState(() {
-                  isPaid = !isPaid;
-                });
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  isPaid ? Colors.red : Colors.green, // Change button color
-                ),
-              ),
-              child: Text(
-                isPaid ? "Switch to Free Plan" : "Switch to Pro Plan",
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // Toggle the user's plan (free/pro) when the button is clicked
+            //     setState(() {
+            //       isPaid = !isPaid;
+            //     });
+            //   },
+            //   style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(
+            //       isPaid ? Colors.red : Colors.green, // Change button color
+            //     ),
+            //   ),
+            //   child: Text(
+            //     isPaid ? "Switch to Free Plan" : "Switch to Pro Plan",
+            //     style: const TextStyle(
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
               height: 15,
             ),
@@ -182,10 +186,10 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                   if (kDebugMode) {
                     print("1");
                   }
-                  if (userEmail != null) {
+                  if (authProvider.user!.email != null) {
                     final authRepository = Authentication();
-                    await authRepository
-                        .logout(userEmail!); // Use non-null assertion operator
+                    await authRepository.logout(authProvider
+                        .user!.email!); // Use non-null assertion operator
                     if (kDebugMode) {
                       print("2");
                     }

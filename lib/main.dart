@@ -1,7 +1,9 @@
 import 'package:ai_resume_builder/constant/random.dart';
+import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'views/landing-signup-signin_view/screens/cookie_state.dart';
 
 void main() async {
@@ -13,8 +15,12 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => CookieProvider(),
         ),
-         ChangeNotifierProvider(
-      create: (context) => SharedData(),)
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SharedData(),
+        )
       ],
       child: const MyApp(),
     ),
@@ -34,7 +40,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 // class UserDetailsProvider extends ChangeNotifier {
 //   UserDetails? _userDetails;

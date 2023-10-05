@@ -1,7 +1,7 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
-import 'package:in_app_payment/in_app_payment.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_payment/in_app_payment.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -34,6 +34,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           right: 18,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,9 +140,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
             Column(
               children: [
                 Container(
-                  color: Colors.black,
-                  child: pay.googlePay(context,
-                      amountToPay: packagePrice, userID: '23',),
+                  child: pay.googlePay(
+                    context,
+                    amountToPay: packagePrice,
+                    userID: '23',
+                  ),
                 ),
                 const SizedBox(
                   height: 60,
