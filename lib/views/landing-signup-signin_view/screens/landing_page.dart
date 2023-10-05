@@ -48,8 +48,8 @@ class LandingPageView extends StatelessWidget {
               text: "Sign Up",
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const SignUpView();
-                  }));
+                  return const SignUpView();
+                }));
               },
             ),
             const SizedBox(
@@ -60,7 +60,7 @@ class LandingPageView extends StatelessWidget {
               height: 50,
               child: OutlinedButton(
                 onPressed: () {
-                   Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const SignInView();
                   }));
                 },
@@ -96,4 +96,3 @@ class LandingPageView extends StatelessWidget {
     );
   }
 }
-

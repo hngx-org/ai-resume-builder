@@ -19,7 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     // const Center(
     //   child: Text('My Resume'),
     // ),
-    const MyResumeScreen(),
+    MyResumeScreen(),
     // const Center(
     //   child: Text('Profile'),
     // ),
