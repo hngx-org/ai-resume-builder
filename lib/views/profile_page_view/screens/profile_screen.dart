@@ -30,7 +30,7 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
     final authRepository = Authentication();
     final user = await authRepository.getUser();
     setState(() {
-      userEmail = user?.email;
+      userEmail = user?.email ?? 'johjdoe_email@example.com';
     });
   }
 
