@@ -2,6 +2,7 @@ import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
+import 'package:ai_resume_builder/views/payment_view/screens/payment_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
@@ -18,7 +19,7 @@ class ProfilePageScreen extends StatefulWidget {
 
 class _ProfilePageScreenState extends State<ProfilePageScreen> {
   bool isPaid = false; // Initialize as false (free plan)
-  String? userEmail; 
+  String? userEmail;
 
   @override
   void initState() {
@@ -39,6 +40,8 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
     return Scaffold(
       appBar: const CustomAppHeader(
         text: "Profile",
+        color: Colors.black,
+        textColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -50,44 +53,52 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
           children: [
             Column(
               children: [
-                Stack(
-                  children: [
-                    const SizedBox(height: 15),
-                    Container(
-                      height: 80,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: isPaid
-                            ? AppColor.createResumeWithAI
-                            : AppColor.upgradeToProLightMode,
-                      ),
-                      child: Text(
-                        isPaid
-                            ? "Hurray you are already a pro user!"
-                            : "Upgrade to a pro account today!",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const PaymentScreen();
+                    }));
+                  },
+                  child: Stack(
+                    children: [
+                      const SizedBox(height: 15),
+                      Container(
+                        height: 80,
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: isPaid
+                              ? AppColor.createResumeWithAI
+                              : AppColor.upgradeToProLightMode,
+                        ),
+                        child: Text(
+                          isPaid
+                              ? "Hurray you are already a pro user!"
+                              : "Upgrade to a pro account today!",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: Image(
-                        image: AssetImage(
-                          ImagePath.crown,
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: Image(
+                          image: AssetImage(
+                            ImagePath.crown,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
@@ -120,7 +131,8 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                     height: 3,
                   ),
                   Text(
-                    userEmail ?? "", // Use userEmail if not null, otherwise use an empty string
+                    userEmail ??
+                        "", // Use userEmail if not null, otherwise use an empty string
                     style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w500,
@@ -172,7 +184,8 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                   }
                   if (userEmail != null) {
                     final authRepository = Authentication();
-                    await authRepository.logout(userEmail!); // Use non-null assertion operator
+                    await authRepository
+                        .logout(userEmail!); // Use non-null assertion operator
                     if (kDebugMode) {
                       print("2");
                     }

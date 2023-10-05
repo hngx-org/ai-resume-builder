@@ -21,6 +21,8 @@ class MyResumeScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppHeader(
         text: "My Resumes",
+        color: Colors.black,
+        textColor: Colors.white,
       ),
       // body: pdfHandler.savedPdfList.isEmpty
       //     ? const Center(
