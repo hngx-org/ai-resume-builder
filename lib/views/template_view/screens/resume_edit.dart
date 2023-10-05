@@ -1,7 +1,6 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:async';
-
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/random.dart';
 import 'package:flutter/foundation.dart';

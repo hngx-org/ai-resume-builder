@@ -1,9 +1,10 @@
+import 'package:ai_resume_builder/views/questionare_view/screens/demo.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
-
-import '../../template_view/screens/resume_edit.dart';
+import 'package:provider/provider.dart';
+import '../../landing-signup-signin_view/screens/cookie_state.dart';
 
 class SelectSkillScreen extends StatefulWidget {
   const SelectSkillScreen({Key? key}) : super(key: key);
@@ -16,6 +17,11 @@ class SelectSkillScreen extends StatefulWidget {
 class _SelectSkillScreenState extends State<SelectSkillScreen> {
   String selectedSkill = ""; // Track the selected skill
   TextEditingController textEditingController = TextEditingController();
+
+  void _share() {
+    final sharedData = Provider.of<SharedData>(context, listen: false);
+    sharedData.updateDataFromdatafromselectskill(selectedSkill);
+  }
 
   final List<String> skills = [
     'HTML/CSS',
@@ -101,7 +107,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>  PdfCreationPage(),
+                    builder: (context) => AiPdfCreationPage(),
                   ),
                 );
               },
@@ -175,6 +181,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
                     final skill = skills[index];
                     return InkWell(
                       onTap: () {
+                        _share();
                         setState(() {
                           selectedSkill = skill;
                           textEditingController.text = skill;
@@ -230,7 +237,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PdfCreationPage(),
+                    builder: (context) => AiPdfCreationPage(),
                   ),
                 );
               },

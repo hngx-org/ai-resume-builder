@@ -3,6 +3,9 @@ import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/screens/work_experience.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
+import 'package:provider/provider.dart';
+
+import '../../landing-signup-signin_view/screens/cookie_state.dart';
 
 class RoleScreen extends StatefulWidget {
   const RoleScreen({Key? key}) : super(key: key);
@@ -15,6 +18,11 @@ class RoleScreen extends StatefulWidget {
 class _RoleScreenState extends State<RoleScreen> {
   String selectedCategory = ""; // Track the selected category
   TextEditingController textEditingController = TextEditingController();
+
+  void _share() {
+    final sharedData = Provider.of<SharedData>(context, listen: false);
+    sharedData.updateDataFromdatafromdesiredrole(selectedCategory);
+  }
 
   final List<String> jobCategories = [
     "Accountant",
@@ -148,6 +156,7 @@ class _RoleScreenState extends State<RoleScreen> {
 
                     return InkWell(
                       onTap: () {
+                        _share();
                         setState(() {
                           if (isSelected) {
                             selectedCategory = ""; // Deselect if already selected

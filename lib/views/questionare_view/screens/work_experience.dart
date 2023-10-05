@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/image_path.dart';
+import '../../landing-signup-signin_view/screens/cookie_state.dart';
 import '../widgets/purple_cell.dart';
 import 'education_level_screen.dart';
 
@@ -14,6 +16,11 @@ class WorkExperienceScreen extends StatefulWidget {
 
 class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
   String selectedExperience = ""; // Track the selected experience
+
+  void _share() {
+    final sharedData = Provider.of<SharedData>(context, listen: false);
+    sharedData.updateDataFromworkexperience(selectedExperience);
+  }
 
   final List<String> experience = [
     "Entry-Level (0-2 years)",
@@ -101,6 +108,7 @@ class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
                     final selected = experience[index] == selectedExperience;
                     return InkWell(
                       onTap: () {
+                        _share();
                         setState(() {
                           selectedExperience =
                               selected ? "" : experience[index];
