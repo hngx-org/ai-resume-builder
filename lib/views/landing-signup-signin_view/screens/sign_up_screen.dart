@@ -79,6 +79,11 @@ class _SignUpViewState extends State<SignUpView> {
         showSnackbar(context, Colors.red, 'SignUp ERROR');
       }
     } catch (e) {
+      setState(() {
+        isLoading = false; // Set loading to false when the sign in fails
+      });
+
+      showSnackbar(context, Colors.red, 'SignUp ERROR');
       print(e.toString());
     }
 
