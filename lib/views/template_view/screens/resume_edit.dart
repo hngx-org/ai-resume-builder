@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:ai_resume_builder/constant/colors.dart';
+import 'package:ai_resume_builder/constant/random.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
-import 'dart:io';
-import 'dart:async';
 
 class PdfCreationPage extends StatefulWidget {
   final String initialText;
@@ -45,20 +47,28 @@ class _PdfCreationPageState extends State<PdfCreationPage> {
     final graphics = page.graphics;
     final text = textEditingController.text; // Ensure text is not null
 
-    graphics.drawString(
-      text,
-      PdfStandardFont(PdfFontFamily.helvetica, 12),
-      brush: PdfSolidBrush(PdfColor(0, 0, 0)),
-      bounds: const Rect.fromLTWH(0, 0, 150, 20),
-    );
+    try {
+      graphics.drawString(
+        text,
+        PdfStandardFont(PdfFontFamily.helvetica, 12),
+        brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+        bounds: const Rect.fromLTWH(0, 0, 150, 20),
+      );
 
-    // Save the document as a file
-    final bytes = await document.save();
-    final file = File('HelloWorld.pdf');
-    await file.writeAsBytes(bytes);
+      final directory = await getExternalStorageDirectory();
+      // Save the document as a file
+      List<int> bytes = await document.save();
+      // final file = File('HelloWorld.pdf');
 
-    // Dispose the document to release resources
-    document.dispose();
+      // final file = File('${directory!.path}/HelloWorld.pdf');
+      // await file.writeAsBytes(bytes);
+
+      // Dispose the document to release resources
+      document.dispose();
+      pdfHandler.saveAndLaunchFile(bytes, 'Output.pdf');
+    } catch (e) {
+      print('This >>>>>${e.toString()}');
+    }
   }
 
   @override
@@ -104,7 +114,8 @@ class _PdfCreationPageState extends State<PdfCreationPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: _createPdf,
-          backgroundColor: AppColor.upgradeToProDarkMode, // Change the background color
+          backgroundColor:
+              AppColor.upgradeToProDarkMode, // Change the background color
           child: const Icon(Icons.save),
         ),
       ),

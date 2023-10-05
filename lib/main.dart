@@ -1,8 +1,10 @@
+import 'package:ai_resume_builder/constant/random.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:flutter/material.dart';
 
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized
+  await pdfHandler.loadSavedPdfList();
   runApp(const MyApp());
 }
 
