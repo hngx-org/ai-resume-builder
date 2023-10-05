@@ -1,9 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
 
@@ -19,19 +18,24 @@ class ProfilePageScreen extends StatefulWidget {
 
 class _ProfilePageScreenState extends State<ProfilePageScreen> {
   bool isPaid = false; // Initialize as false (free plan)
+  String? userEmail; 
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserEmail(); // Load user email when the page is created
+  }
+
+  Future<void> _loadUserEmail() async {
+    final authRepository = Authentication();
+    final user = await authRepository.getUser();
+    setState(() {
+      userEmail = user?.email;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final authRepository = Authentication();
-    final userEmail = authRepository.getUser();
-    // final userDetails = Provider.of<UserDetailsProvider>(context).userDetails;
-
-    // if (userDetails != null) {
-    //   userEmail = userDetails.useremail;
-
-    //   print(userEmail);
-    // }
-
     return Scaffold(
       appBar: const CustomAppHeader(
         text: "Profile",
@@ -101,10 +105,10 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                   color: AppColor.selectedItem,
                 ),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "John Doe",
                     style: TextStyle(
                       fontFamily: "Inter",
@@ -112,12 +116,12 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                       fontSize: 20,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 3,
                   ),
                   Text(
-                    "johndoe@hmail.com",
-                    style: TextStyle(
+                    userEmail ?? "", // Use userEmail if not null, otherwise use an empty string
+                    style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
@@ -162,33 +166,47 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
             ),
             InkWell(
               onTap: () async {
-                // Navigate to a new screen without the back button
-
-                // Future user = await authRepository.getUser();
-
                 try {
-                  print("1");
-                  authRepository.logout(userEmail.toString());
-                  print("2");
-                  print(userEmail.toString());
+                  if (kDebugMode) {
+                    print("1");
+                  }
+                  if (userEmail != null) {
+                    final authRepository = Authentication();
+                    await authRepository.logout(userEmail!); // Use non-null assertion operator
+                    if (kDebugMode) {
+                      print("2");
+                    }
+                    if (kDebugMode) {
+                      print(userEmail.toString());
+                    }
 
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) {
-                        return const LandingPageView(); // Replace with your logout screen
-                      },
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        return child;
-                      },
-                    ),
-                    (route) => false,
-                  );
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return const LandingPageView(); // Replace with your logout screen
+                        },
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return child;
+                        },
+                      ),
+                      (route) => false,
+                    );
 
-                  print("success");
+                    if (kDebugMode) {
+                      print("success");
+                    }
+                  } else {
+                    if (kDebugMode) {
+                      print("userEmail is null");
+                    } // Handle the case where userEmail is null
+                  }
                 } catch (e) {
-                  print(e.toString());
+                  if (kDebugMode) {
+                    print(e.toString());
+                  }
                 }
               },
               child: Text(

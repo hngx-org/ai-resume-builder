@@ -36,6 +36,7 @@ class _SignUpViewState extends State<SignUpView> {
   Widget build(BuildContext context) {
 
 
+    // ignore: no_leading_underscores_for_local_identifiers
     void _signUp() async {
     setState(() {
       isLoading = true; // Set loading to true when signing up

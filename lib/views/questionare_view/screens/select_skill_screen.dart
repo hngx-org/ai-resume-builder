@@ -1,4 +1,3 @@
-import 'package:ai_resume_builder/views/preview_view/screens/preview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
@@ -10,6 +9,7 @@ class SelectSkillScreen extends StatefulWidget {
   const SelectSkillScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SelectSkillScreenState createState() => _SelectSkillScreenState();
 }
 

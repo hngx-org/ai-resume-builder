@@ -1,7 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/random.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -43,31 +46,43 @@ class _PdfCreationPageState extends State<PdfCreationPage> {
   }
 
   void _createPdf() async {
+    // final page = document.pages.add();
+    // final graphics = page.graphics;
+    // final text = textEditingController.text; // Ensure text is not null
     final page = document.pages.add();
-    final graphics = page.graphics;
-    final text = textEditingController.text; // Ensure text is not null
+  final graphics = page.graphics;
+
+  final text = textEditingController.text;
+
+  final font = PdfStandardFont(PdfFontFamily.helvetica, 12);
+
+  final layoutFormat = PdfLayoutFormat(layoutType: PdfLayoutType.paginate);
+
+  final bounds = Rect.fromLTWH(0, 0, page.getClientSize().width, -1);
+
 
     try {
-      graphics.drawString(
-        text,
-        PdfStandardFont(PdfFontFamily.helvetica, 12),
-        brush: PdfSolidBrush(PdfColor(0, 0, 0)),
-        bounds: const Rect.fromLTWH(0, 0, 150, 20),
-      );
+      final textElement = PdfTextElement(
+    text: text,
+    font: font,
+    brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+  );
+
+  final layoutResult = textElement.draw(
+    page: page,
+    bounds: bounds,
+    format: layoutFormat,
+  );
 
       final directory = await getExternalStorageDirectory();
       // Save the document as a file
       List<int> bytes = await document.save();
-      // final file = File('HelloWorld.pdf');
-
-      // final file = File('${directory!.path}/HelloWorld.pdf');
-      // await file.writeAsBytes(bytes);
-
-      // Dispose the document to release resources
       document.dispose();
       pdfHandler.saveAndLaunchFile(bytes, 'Output.pdf');
     } catch (e) {
-      print('This >>>>>${e.toString()}');
+      if (kDebugMode) {
+        print('This >>>>>${e.toString()}');
+      }
     }
   }
 
