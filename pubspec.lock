@@ -169,6 +169,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+
+
   fixnum:
     dependency: transitive
     description:
@@ -177,6 +179,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+
   flutter:
     dependency: "direct main"
     description: flutter
@@ -224,6 +227,8 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+
+
   glob:
     dependency: transitive
     description:
@@ -248,6 +253,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.4"
+
   http:
     dependency: "direct main"
     description:
@@ -328,6 +334,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+
+  open_file:
+    dependency: "direct main"
+    description:
+      name: open_file
+      sha256: a5a32d44acb7c899987d0999e1e3cbb0a0f1adebbf41ac813ec6d2d8faa0af20
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.2"
+
   package_config:
     dependency: transitive
     description:
@@ -336,6 +352,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+
   path:
     dependency: transitive
     description:
@@ -353,7 +370,11 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
+
+    dependency: "direct main"
+
     dependency: transitive
+
     description:
       name: path_provider
       sha256: a1aa8aaa2542a6bc57e381f132af822420216c80d4781f7aa085ca3229208aaa
@@ -432,6 +453,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+
+  shared_preferences:
+    dependency: "direct main"
+
   pub_semver:
     dependency: transitive
     description:
@@ -450,6 +475,7 @@ packages:
     version: "2.4.1"
   shared_preferences:
     dependency: transitive
+
     description:
       name: shared_preferences
       sha256: b7f41bad7e521d205998772545de63ff4e6c97714775902c199353f8bf1511ac
