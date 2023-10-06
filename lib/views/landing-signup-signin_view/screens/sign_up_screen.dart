@@ -6,15 +6,12 @@ import 'package:ai_resume_builder/constant/brain.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/constant/sizedboxes.dart';
-import 'package:ai_resume_builder/navigation_bar.dart';
+import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/form_button1.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/text_input_widget1.dart';
 import 'package:flutter/material.dart';
-import 'package:hng_authentication/authentication.dart';
-import 'package:hng_authentication/widgets/widget.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-
+import 'package:provider/provider.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -30,65 +27,69 @@ class _SignUpViewState extends State<SignUpView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  
-
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(
+      context,
+    );
+    void _signUp(BuildContext context) {
+      final name = nameController.text;
+      final email = emailController.text;
+      final password = passwordController.text;
 
-
-    // ignore: no_leading_underscores_for_local_identifiers
-    void _signUp() async {
-    setState(() {
-      isLoading = true; // Set loading to true when signing up
-    });
-
-    final name = nameController.text;
-    final email = emailController.text;
-    final password = passwordController.text;
-
-    final authRepository = Authentication();
-
-    try {
-      print("not");
-      final data = await authRepository.signUp(email, name, password);
-      print("passed");
-
-      if (data != null) {
-        // Registration failed, display an error message
-        setState(() {
-          isLoading = false; // Set loading to false when the sign up fails
-        });
-
-        print(data.cookie.toString());
-
-        showSnackbar(context, Colors.black, 'SignUp successful');
-        print('sign up Email >>> ${data.email}');
-        print('sign up id >>> ${data.id}');
-        print('sign up created at >>> ${data.createdAt}');
-
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return const BottomNavBar();
-          }),
-          (route) => false,
-        );
-      } else {
-        setState(() {
-          isLoading = false; // Set loading to false when sign-up is complete
-        });
-
-        print('errror:   eeeeeee');
-        showSnackbar(context, Colors.red, 'SignUp ERROR');
-      }
-    } catch (e) {
-      setState(() {
-        isLoading = false; // Set loading to false when the sign in fails
-      });
-
-      showSnackbar(context, Colors.red, 'SignUp ERROR');
-      print(e.toString());
+      authProvider.signUp(name, email, password, context);
     }
+    // ignore: no_leading_underscores_for_local_identifiers
+    // void _signUp() async {
+    // setState(() {
+    //   isLoading = true; // Set loading to true when signing up
+    // });
+    //
+    // final name = nameController.text;
+    // final email = emailController.text;
+    // final password = passwordController.text;
+    //
+    // final authRepository = Authentication();
+    //
+    // try {
+    //   print("not");
+    //   final data = await authRepository.signUp(email, name, password);
+    //   print("passed");
+    //
+    //   if (data != null) {
+    //     // Registration failed, display an error message
+    //     setState(() {
+    //       isLoading = false; // Set loading to false when the sign up fails
+    //     });
+    //
+    //     showSnackbar(context, Colors.black, 'SignUp successful');
+    //     print('sign up Email >>> ${data.email}');
+    //     print('sign up id >>> ${data.id}');
+    //     print('sign up created at >>> ${data.createdAt}');
+    //
+    //     Navigator.pushAndRemoveUntil(
+    //       context,
+    //       MaterialPageRoute(builder: (context) {
+    //         return const BottomNavBar();
+    //       }),
+    //       (route) => false,
+    //     );
+    //   } else {
+    //     setState(() {
+    //       isLoading = false; // Set loading to false when sign-up is complete
+    //     });
+    //
+    //     print('errror:   eeeeeee');
+    //     showSnackbar(context, Colors.red, 'SignUp ERROR');
+    //   }
+    // } catch (e) {
+    //   setState(() {
+    //     isLoading = false; // Set loading to false when the sign in fails
+    //   });
+    //
+    //   showSnackbar(context, Colors.red, 'SignUp ERROR');
+    //   print(e.toString());
+    // }
 
     // // Simulate a delay (you would replace this with your actual sign-up logic)
     // Future.delayed(Duration(seconds: 2), () {
@@ -96,11 +97,9 @@ class _SignUpViewState extends State<SignUpView> {
     //     _isLoading = false; // Set loading to false when sign-up is complete
     //   });
     // });
-  }
 
-    
     return Scaffold(
-      body: isLoading
+      body: authProvider.isLoading
           ? SpinKitDoubleBounce(
               color: AppColor.bottomNavigationBar,
             )
@@ -218,7 +217,7 @@ class _SignUpViewState extends State<SignUpView> {
                       FormButton1(
                         text: "Sign Up",
                         onPressed: () {
-                          _signUp();
+                          _signUp(context);
                         },
                         // onPressed: () async {
                         //   final name = (nameController).text;
