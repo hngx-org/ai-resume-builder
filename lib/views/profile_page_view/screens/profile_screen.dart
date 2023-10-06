@@ -1,5 +1,6 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/constant/random.dart';
 import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
@@ -20,22 +21,7 @@ class ProfilePageScreen extends StatefulWidget {
 }
 
 class _ProfilePageScreenState extends State<ProfilePageScreen> {
-  bool isPaid = false; // Initialize as false (free plan)
-  String? userEmail;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadUserEmail(); // Load user email when the page is created
-  }
-
-  Future<void> _loadUserEmail() async {
-    final authRepository = Authentication();
-    final user = await authRepository.getUser();
-    setState(() {
-      userEmail = user?.email ?? 'johjdoe_email@example.com';
-    });
-  }
+  bool isPaid = false;
 
   @override
   Widget build(BuildContext context) {
@@ -189,15 +175,17 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                   if (authProvider.user!.email != null) {
                     final authRepository = Authentication();
                     await authRepository.logout(authProvider
-                        .user!.email!); // Use non-null assertion operator
+                        .user!.email); // Use non-null assertion operator
                     if (kDebugMode) {
                       print("2");
                     }
                     if (kDebugMode) {
-                      print(userEmail.toString());
+                      print(authProvider.user!.email.toString());
                     }
 
                     // ignore: use_build_context_synchronously
+                    showReusableDialog(context, 'Logging out');
+                    await Future.delayed(const Duration(seconds: 2));
                     Navigator.pushAndRemoveUntil(
                       context,
                       PageRouteBuilder(
