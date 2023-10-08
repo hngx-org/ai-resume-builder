@@ -19,7 +19,7 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
   String selectedEducation = ""; // Track the selected education
   TextEditingController textEditingController = TextEditingController();
 
-  void _share() {
+  void _share(BuildContext context) {
     final sharedData = Provider.of<SharedData>(context, listen: false);
     sharedData.updateDataFromdataFromeducationallevel(selectedEducation);
   }
@@ -179,7 +179,7 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
                     return InkWell(
                       onTap: () {
                         // Get an instance of SharedData
-                        _share();
+                        _share(context);
                         setState(() {
                           selectedEducation = selected ? "" : education[index];
                           textEditingController.text = selectedEducation;

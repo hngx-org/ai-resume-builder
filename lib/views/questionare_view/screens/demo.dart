@@ -1,7 +1,9 @@
 // ignore_for_file: unused_local_variable
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/random.dart';
+import 'package:ai_resume_builder/models/user_data.dart';
 import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
+import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/cookie_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hngx_openai/repository/openai_repository.dart';
@@ -85,14 +87,19 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final sharedData = Provider.of<SharedData>(context);
+    final sharedData = Provider.of<SharedData>(context);
     final authProvider = Provider.of<AuthProvider>(context);
 
 // Access the shared data
-//     String education = sharedData.dataFromeducationallevel!;
-//     String role = sharedData.datafromdesiredrole!;
-//     String skill = sharedData.datafromselectskill!;
-//     String experience = sharedData.datafromworkexperience!;
+    String education = sharedData.dataFromeducationallevel!;
+    String role = sharedData.datafromdesiredrole!;
+    String skill = sharedData.datafromselectskill!;
+    String experience = sharedData.datafromworkexperience!;
+
+    print('Eduction : $education');
+    print('role : $role');
+    print('skill : $skill');
+    print('experience : $experience');
 
     return GestureDetector(
       onTap: () {
@@ -113,8 +120,8 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
             IconButton(
               onPressed: () async {
                 String userInput =
-                    "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is education, the role am appling for is role, i have experience years of experience in this field, additional skills are skill. so help me construct it in full thanks.";
-                String cookie = authProvider.user!.cookie.toString();
+                    "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is $education, the role am appling for is $role, i have experience years of $experience in this field, additional skills are $skill. so help me construct it in full thanks.";
+                String cookie = UserData.userData['cookie'].toString();
                 print('My Cookie ====> $cookie');
 
                 // Instantiate OpenAIRepository

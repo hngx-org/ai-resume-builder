@@ -53,32 +53,30 @@ class PaymentScreenHeader extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 70,
       color: color,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 60),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: textColor,
-              ),
+      padding: EdgeInsets.symmetric(vertical: 15),
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: textColor,
             ),
-            Text(
-              text,
-              style: TextStyle(
-                color: textColor,
-                fontFamily: "Inter",
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              ),
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              color: textColor,
+              fontFamily: "Inter",
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
