@@ -8,10 +8,11 @@ import 'package:hng_authentication/widgets/widget.dart';
 class AuthProvider extends ChangeNotifier {
   String cookie = '';
   String accessToken = '';
+  int? credit;
 
-  UserModel? _user;
+  late UserModel _user;
 
-  UserModel? get user => _user;
+  UserModel get user => _user;
 
   bool isLoading = false;
   Authentication authRepository = Authentication();
@@ -43,8 +44,14 @@ class AuthProvider extends ChangeNotifier {
     try {
       final data = await authRepository.signUp(email, name, password);
       if (data != null) {
-        _user =
-            UserModel(name: data.name, email: data.email, password: password);
+        _user = UserModel(
+          name: data.name,
+          email: data.email,
+          password: password,
+          cookie: data.cookie!,
+        );
+        cookie = data.cookie!;
+        // credit = data.credits;
         showSnackbar(context, Colors.black, 'SignUp successful');
         Navigator.pushAndRemoveUntil(
           context,
@@ -76,10 +83,15 @@ class AuthProvider extends ChangeNotifier {
     try {
       final data = await authRepository.signIn(email, password);
       if (data != null) {
-        _user =
-            UserModel(name: data.name, email: data.email, password: password);
+        _user = UserModel(
+          name: data.name,
+          email: data.email,
+          password: password,
+          cookie: data.cookie,
+        );
 
         cookie = data.cookie;
+        print('Sign in cookie $cookie');
         showReusableDialog(context, 'Sign-In in process');
         await Future.delayed(const Duration(seconds: 3));
         showSnackbar(context, Colors.black, 'SignIn successful');

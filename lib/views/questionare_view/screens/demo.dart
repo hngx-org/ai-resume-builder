@@ -9,8 +9,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
-import '../../landing-signup-signin_view/screens/cookie_state.dart';
-
 class AiPdfCreationPage extends StatefulWidget {
   final String initialText;
 
@@ -87,17 +85,14 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final sharedData = Provider.of<SharedData>(context);
+    // final sharedData = Provider.of<SharedData>(context);
     final authProvider = Provider.of<AuthProvider>(context);
-    final email = emailController.text;
-    final password = passwordController.text;
-    final data = authRepository.signIn(email, password);
 
 // Access the shared data
-    String education = sharedData.dataFromeducationallevel!;
-    String role = sharedData.datafromdesiredrole!;
-    String skill = sharedData.datafromselectskill!;
-    String experience = sharedData.datafromworkexperience!;
+//     String education = sharedData.dataFromeducationallevel!;
+//     String role = sharedData.datafromdesiredrole!;
+//     String skill = sharedData.datafromselectskill!;
+//     String experience = sharedData.datafromworkexperience!;
 
     return GestureDetector(
       onTap: () {
@@ -118,9 +113,9 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
             IconButton(
               onPressed: () async {
                 String userInput =
-                    "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is $education, the role am appling for is $role, i have $experience years of experience in this field, additional skills are $skill. so help me construct it in full thanks.";
-                const String cookie =
-                    "session=487d97a5-3e43-4502-80d4-9315c3d7bf77.24ZfCu95q06BqVuCUFWuJJoLAgM";
+                    "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is education, the role am appling for is role, i have experience years of experience in this field, additional skills are skill. so help me construct it in full thanks.";
+                String cookie = authProvider.user!.cookie.toString();
+                print('My Cookie ====> $cookie');
 
                 // Instantiate OpenAIRepository
                 OpenAIRepository openAI = OpenAIRepository();
