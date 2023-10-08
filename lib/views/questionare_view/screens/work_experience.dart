@@ -7,7 +7,9 @@ import '../widgets/purple_cell.dart';
 import 'education_level_screen.dart';
 
 class WorkExperienceScreen extends StatefulWidget {
-  const WorkExperienceScreen({Key? key}) : super(key: key);
+  const WorkExperienceScreen({Key? key, required this.selectedCategory}) : super(key: key);
+
+  final String selectedCategory;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -62,7 +64,7 @@ class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const EducationLevelScreen(),
+                    builder: (context) => EducationLevelScreen(selectedCategory: widget.selectedCategory, selectedExperience: selectedExperience,),
                   ),
                 );
               },
@@ -161,7 +163,7 @@ class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const EducationLevelScreen(),
+                    builder: (context) => EducationLevelScreen(selectedCategory: widget.selectedCategory, selectedExperience: selectedExperience,),
                   ),
                 );
               },

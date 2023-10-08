@@ -7,7 +7,11 @@ import 'package:provider/provider.dart';
 import '../../landing-signup-signin_view/screens/cookie_state.dart';
 
 class SelectSkillScreen extends StatefulWidget {
-  const SelectSkillScreen({Key? key}) : super(key: key);
+  const SelectSkillScreen({Key? key, required this.selectedCategory, required this.selectedExperience, required this.selectedEducation}) : super(key: key);
+
+  final String selectedCategory;
+  final String selectedExperience;
+  final String selectedEducation;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -107,7 +111,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AiPdfCreationPage(),
+                    builder: (context) => AiPdfCreationPage(selectedCategory: widget.selectedCategory, selectedEducation: widget.selectedEducation, selectedExperience: widget.selectedExperience, selectedSkill: selectedSkill,),
                   ),
                 );
               },
@@ -237,7 +241,7 @@ class _SelectSkillScreenState extends State<SelectSkillScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AiPdfCreationPage(),
+                    builder: (context) => AiPdfCreationPage(selectedCategory: widget.selectedCategory, selectedEducation: widget.selectedEducation, selectedExperience: widget.selectedExperience, selectedSkill: selectedSkill,),
                   ),
                 );
               },

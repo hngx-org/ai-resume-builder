@@ -17,7 +17,16 @@ class AiPdfCreationPage extends StatefulWidget {
 
   const AiPdfCreationPage(
       {super.key,
-      this.initialText = "Click on the Refresh Icon to load your Resume"});
+      this.initialText = "Click on the Refresh Icon to load your Resume",
+      required this.selectedCategory,
+      required this.selectedExperience,
+      required this.selectedEducation,
+      required this.selectedSkill});
+
+  final String selectedCategory;
+  final String selectedExperience;
+  final String selectedEducation;
+  final String selectedSkill;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -89,14 +98,19 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final sharedData = Provider.of<SharedData>(context);
+    // final sharedData = Provider.of<SharedData>(context);
     final authProvider = Provider.of<AuthProvider>(context);
 
 // Access the shared data
-    String education = sharedData.dataFromeducationallevel!;
-    String role = sharedData.datafromdesiredrole!;
-    String skill = sharedData.datafromselectskill!;
-    String experience = sharedData.datafromworkexperience!;
+    String education = widget.selectedEducation.toString();
+    String role = widget.selectedCategory.toString();
+    String skill = widget.selectedSkill.toString();
+    String experience = widget.selectedExperience.toString();
+
+    print(education);
+    print(role);
+    print(skill);
+    print(experience);
 
     // print('Eduction : $education');
     // print('role : $role');

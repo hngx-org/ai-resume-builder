@@ -8,7 +8,11 @@ import 'package:provider/provider.dart';
 import '../../landing-signup-signin_view/screens/cookie_state.dart';
 
 class EducationLevelScreen extends StatefulWidget {
-  const EducationLevelScreen({Key? key}) : super(key: key);
+  const EducationLevelScreen({Key? key, required this.selectedCategory, required this.selectedExperience}) : super(key: key);
+
+  final String selectedCategory;
+  final String selectedExperience;
+
 
   @override
   // ignore: library_private_types_in_public_api
@@ -106,7 +110,7 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
             child: InkWell(
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const SelectSkillScreen(),
+                  builder: (context) => SelectSkillScreen(selectedCategory: widget.selectedCategory, selectedExperience: widget.selectedExperience, selectedEducation: selectedEducation,),
                 ),
               ),
               child: Image.asset(
@@ -233,7 +237,7 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const SelectSkillScreen(),
+                    builder: (context) => SelectSkillScreen(selectedCategory: widget.selectedCategory, selectedExperience: widget.selectedExperience, selectedEducation: selectedEducation,),
                   ),
                 );
               },

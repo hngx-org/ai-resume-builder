@@ -215,7 +215,7 @@ class _RoleScreenState extends State<RoleScreen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const WorkExperienceScreen(),
+                    builder: (context) => WorkExperienceScreen(selectedCategory: selectedCategory,),
                   ),
                 );
               },

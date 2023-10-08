@@ -179,7 +179,7 @@ class _SignInViewState extends State<SignInView> {
                               padding: const EdgeInsets.only(right: 5.0),
                               child: IconButton(
                                 icon: Icon(
-                                  obscureText
+                                  obscureText2
                                       ? Icons.visibility
                                       : Icons.visibility_off,
                                 ),
