@@ -6,14 +6,13 @@ import 'package:ai_resume_builder/constant/brain.dart';
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/constant/sizedboxes.dart';
-import 'package:ai_resume_builder/navigation_bar.dart';
+import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 // import 'package:ai_resume_builder/views/landing-signup-signin_view/data/user_details.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/form_button1.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/widgets/text_input_widget1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hng_authentication/authentication.dart';
-import 'package:hng_authentication/widgets/widget.dart';
+import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
 
 class SignInView extends StatefulWidget {
@@ -29,57 +28,65 @@ class _SignInViewState extends State<SignInView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void _signIn() async {
-    setState(() {
-      isLoading = true; // Set loading to true when signing up
-    });
-
-    final email = emailController.text;
-    final password = passwordController.text;
-
-    final authRepository = Authentication();
-
-    try {
-      final data = await authRepository.signIn(email, password);
-
-      if (data != null) {
-        setState(() {
-          isLoading = false; // Set loading to false when sign-up is complete
-        });
-
-        showSnackbar(context, Colors.black, 'SignIn successful');
-        print('sign in result: >>> $data');
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: ((context) {
-              return const BottomNavBar();
-            }),
-          ),
-          (route) => false,
-        );
-      } else {
-        setState(() {
-          isLoading = false; // Set loading to false when the sign in fails
-        });
-
-        print('errror:   eeeeeee');
-        showSnackbar(context, Colors.red, 'SignIn ERROR');
-      }
-    } catch (e) {
-      setState(() {
-        isLoading = false; // Set loading to false when the sign in fails
-      });
-
-      showSnackbar(context, Colors.red, 'SignIn ERROR');
-      print(e);
-    }
-  }
+  // void _signIn() async {
+  //   setState(() {
+  //     isLoading = true; // Set loading to true when signing up
+  //   });
+  //
+  //   final email = emailController.text;
+  //   final password = passwordController.text;
+  //
+  //   final authRepository = Authentication();
+  //
+  //   try {
+  //     final data = await authRepository.signIn(email, password);
+  //
+  //     if (data != null) {
+  //       setState(() {
+  //         isLoading = false; // Set loading to false when sign-up is complete
+  //       });
+  //
+  //       showSnackbar(context, Colors.black, 'SignIn successful');
+  //       print('sign in result: >>> $data');
+  //       Navigator.pushAndRemoveUntil(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: ((context) {
+  //             return const BottomNavBar();
+  //           }),
+  //         ),
+  //         (route) => false,
+  //       );
+  //     } else {
+  //       setState(() {
+  //         isLoading = false; // Set loading to false when the sign in fails
+  //       });
+  //
+  //       print('errror:   eeeeeee');
+  //       showSnackbar(context, Colors.red, 'SignIn ERROR');
+  //     }
+  //   } catch (e) {
+  //     setState(() {
+  //       isLoading = false; // Set loading to false when the sign in fails
+  //     });
+  //
+  //     showSnackbar(context, Colors.red, 'SignIn ERROR');
+  //     print(e);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    void _signIn(BuildContext context) async {
+      final email = emailController.text;
+      final password = passwordController.text;
+      authProvider.signIn(email, password, context);
+    }
+
     return Scaffold(
-      body: isLoading
+      body: authProvider.isLoading
           ? SpinKitDoubleBounce(
               color: AppColor.bottomNavigationBar,
             )
@@ -198,7 +205,7 @@ class _SignInViewState extends State<SignInView> {
                         //   );
                         // },
                         onPressed: () {
-                          _signIn();
+                          _signIn(context);
                         },
                       ),
                     ],

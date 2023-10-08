@@ -3,6 +3,9 @@ import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/views/questionare_view/screens/select_skill_screen.dart';
 import 'package:ai_resume_builder/views/questionare_view/widgets/purple_cell.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../landing-signup-signin_view/screens/cookie_state.dart';
 
 class EducationLevelScreen extends StatefulWidget {
   const EducationLevelScreen({Key? key}) : super(key: key);
@@ -15,6 +18,11 @@ class EducationLevelScreen extends StatefulWidget {
 class _EducationLevelScreenState extends State<EducationLevelScreen> {
   String selectedEducation = ""; // Track the selected education
   TextEditingController textEditingController = TextEditingController();
+
+  void _share(BuildContext context) {
+    final sharedData = Provider.of<SharedData>(context, listen: false);
+    sharedData.updateDataFromdataFromeducationallevel(selectedEducation);
+  }
 
   final List<String> education = [
     "Associate of Arts (AA)",
@@ -170,6 +178,8 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
                     final selected = education[index] == selectedEducation;
                     return InkWell(
                       onTap: () {
+                        // Get an instance of SharedData
+                        _share(context);
                         setState(() {
                           selectedEducation = selected ? "" : education[index];
                           textEditingController.text = selectedEducation;

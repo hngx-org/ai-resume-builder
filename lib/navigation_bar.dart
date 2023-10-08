@@ -19,7 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     // const Center(
     //   child: Text('My Resume'),
     // ),
-    const MyResumeScreen(),
+    //const MyResumeScreen(),
     // const Center(
     //   child: Text('Profile'),
     // ),
@@ -67,19 +67,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   ),
                   label: 'Templates',
                 ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    ImagePath.openedFolderIcon,
-                    color: _currentIndex == 1
-                        ? AppColor.selectedItem
-                        : Colors.white,
-                  ),
-                  label: 'My Resumes',
-                ),
+                // BottomNavigationBarItem(
+                //   icon: Image.asset(
+                //     ImagePath.openedFolderIcon,
+                //     color: _currentIndex == 1
+                //         ? AppColor.selectedItem
+                //         : Colors.white,
+                //   ),
+                //   label: 'My Resumes',
+                // ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
                     ImagePath.profileIcon,
-                    color: _currentIndex == 2
+                    color: _currentIndex == 1
                         ? AppColor.selectedItem
                         : Colors.white,
                   ),

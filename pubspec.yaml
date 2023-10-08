@@ -40,10 +40,21 @@ dependencies:
   # flutter_resume_template: ^1.2.0
   flutter_riverpod: ^2.4.2
   provider: ^6.0.5
+
+  open_file: ^3.3.2
+  shared_preferences: ^2.2.1
+  path_provider: ^2.0.2
+
   hng_authentication: ^0.1.4
   flutter_spinkit: ^5.2.0
+
   syncfusion_flutter_pdf: ^23.1.38
   animated_text_kit: ^4.2.2
+  hngx_openai:
+    git:
+      url: https://github.com/hngx-org/openai-package.git
+      ref: main
+  in_app_payment: ^0.0.2
 
 dev_dependencies:
   flutter_test:

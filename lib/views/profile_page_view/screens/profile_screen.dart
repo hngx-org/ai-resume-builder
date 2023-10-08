@@ -1,11 +1,15 @@
-// ignore_for_file: avoid_print
-
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
+import 'package:ai_resume_builder/constant/random.dart';
+import 'package:ai_resume_builder/models/user_data.dart';
+import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
+import 'package:ai_resume_builder/views/payment_view/screens/payment_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePageScreen extends StatefulWidget {
   const ProfilePageScreen({
@@ -18,23 +22,17 @@ class ProfilePageScreen extends StatefulWidget {
 }
 
 class _ProfilePageScreenState extends State<ProfilePageScreen> {
-  bool isPaid = false; // Initialize as false (free plan)
+  bool isPaid = false;
 
   @override
   Widget build(BuildContext context) {
-    final authRepository = Authentication();
-    final userEmail = authRepository.getUser();
-    // final userDetails = Provider.of<UserDetailsProvider>(context).userDetails;
-
-    // if (userDetails != null) {
-    //   userEmail = userDetails.useremail;
-
-    //   print(userEmail);
-    // }
+    final authProvider = Provider.of<AuthProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppHeader(
         text: "Profile",
+        color: Colors.black,
+        textColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -46,44 +44,52 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
           children: [
             Column(
               children: [
-                Stack(
-                  children: [
-                    const SizedBox(height: 15),
-                    Container(
-                      height: 80,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: isPaid
-                            ? AppColor.createResumeWithAI
-                            : AppColor.upgradeToProLightMode,
-                      ),
-                      child: Text(
-                        isPaid
-                            ? "Hurray you are already a pro user!"
-                            : "Upgrade to a pro account today!",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const PaymentScreen();
+                    }));
+                  },
+                  child: Stack(
+                    children: [
+                      const SizedBox(height: 15),
+                      Container(
+                        height: 80,
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: isPaid
+                              ? AppColor.createResumeWithAI
+                              : AppColor.upgradeToProLightMode,
+                        ),
+                        child: Text(
+                          isPaid
+                              ? "Hurray you are already a pro user!"
+                              : "Upgrade to a pro account today!",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: Image(
-                        image: AssetImage(
-                          ImagePath.crown,
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: Image(
+                          image: AssetImage(
+                            ImagePath.crown,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
@@ -101,23 +107,24 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                   color: AppColor.selectedItem,
                 ),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "John Doe",
-                    style: TextStyle(
+                    UserData.userData['name'].toString(),
+                    style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w900,
                       fontSize: 20,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 3,
                   ),
                   Text(
-                    "johndoe@hmail.com",
-                    style: TextStyle(
+                    UserData.userData['email']
+                        .toString(), // Use userEmail if not null, otherwise use an empty string
+                    style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
@@ -138,57 +145,74 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Toggle the user's plan (free/pro) when the button is clicked
-                setState(() {
-                  isPaid = !isPaid;
-                });
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  isPaid ? Colors.red : Colors.green, // Change button color
-                ),
-              ),
-              child: Text(
-                isPaid ? "Switch to Free Plan" : "Switch to Pro Plan",
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // Toggle the user's plan (free/pro) when the button is clicked
+            //     setState(() {
+            //       isPaid = !isPaid;
+            //     });
+            //   },
+            //   style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(
+            //       isPaid ? Colors.red : Colors.green, // Change button color
+            //     ),
+            //   ),
+            //   child: Text(
+            //     isPaid ? "Switch to Free Plan" : "Switch to Pro Plan",
+            //     style: const TextStyle(
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
               height: 15,
             ),
             InkWell(
               onTap: () async {
-                // Navigate to a new screen without the back button
-
-                // Future user = await authRepository.getUser();
-
                 try {
-                  print("1");
-                  authRepository.logout(userEmail.toString());
-                  print("2");
-                  print(userEmail.toString());
+                  if (kDebugMode) {
+                    print("1");
+                  }
+                  if (UserData.userData['email'] != null) {
+                    final authRepository = Authentication();
+                    await authRepository.logout(UserData
+                        .userData['email']); // Use non-null assertion operator
+                    if (kDebugMode) {
+                      print("2");
+                    }
+                    if (kDebugMode) {
+                      print(UserData.userData['email'].toString());
+                    }
 
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) {
-                        return const LandingPageView(); // Replace with your logout screen
-                      },
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        return child;
-                      },
-                    ),
-                    (route) => false,
-                  );
+                    // ignore: use_build_context_synchronously
+                    showReusableDialog(context, 'Logging out');
+                    await Future.delayed(const Duration(seconds: 2));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return const LandingPageView(); // Replace with your logout screen
+                        },
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return child;
+                        },
+                      ),
+                      (route) => false,
+                    );
 
-                  print("success");
+                    if (kDebugMode) {
+                      print("success");
+                    }
+                  } else {
+                    if (kDebugMode) {
+                      print("userEmail is null");
+                    } // Handle the case where userEmail is null
+                  }
                 } catch (e) {
-                  print(e.toString());
+                  if (kDebugMode) {
+                    print(e.toString());
+                  }
                 }
               },
               child: Text(
