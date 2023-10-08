@@ -1,5 +1,4 @@
 import 'package:ai_resume_builder/constant/colors.dart';
-import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_payment/in_app_payment.dart';
 
@@ -22,11 +21,32 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PaymentScreenHeader(
-        text: "Upgrade to Pro",
-        color: AppColor.upgradeToProLightMode,
-        textColor: AppColor.bottomNavigationBar,
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+        title: const Text(
+          'Upgrade to pro',
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: "Inter",
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        backgroundColor: AppColor.upgradeToProLightMode,
       ),
+      // appBar: PaymentScreenHeader(
+      //   text: "Upgrade to Pro",
+      //   color: AppColor.upgradeToProLightMode,
+      //   textColor: AppColor.bottomNavigationBar,
+      // ),
       body: Padding(
         padding: const EdgeInsets.only(
           left: 18,

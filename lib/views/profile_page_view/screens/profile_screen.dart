@@ -1,6 +1,7 @@
 import 'package:ai_resume_builder/constant/colors.dart';
 import 'package:ai_resume_builder/constant/image_path.dart';
 import 'package:ai_resume_builder/constant/random.dart';
+import 'package:ai_resume_builder/models/user_data.dart';
 import 'package:ai_resume_builder/view_models/providers/auth_provider.dart';
 import 'package:ai_resume_builder/views/landing-signup-signin_view/screens/landing_page.dart';
 import 'package:ai_resume_builder/views/my_resume_view/widgets/resume_screen_header.dart';
@@ -110,7 +111,7 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    authProvider.user!.name.toString().toUpperCase(),
+                    UserData.userData['name'].toString(),
                     style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w900,
@@ -121,8 +122,8 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                     height: 3,
                   ),
                   Text(
-                    authProvider.user!
-                        .email, // Use userEmail if not null, otherwise use an empty string
+                    UserData.userData['email']
+                        .toString(), // Use userEmail if not null, otherwise use an empty string
                     style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w500,
@@ -172,15 +173,15 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                   if (kDebugMode) {
                     print("1");
                   }
-                  if (authProvider.user!.email != null) {
+                  if (UserData.userData['email'] != null) {
                     final authRepository = Authentication();
-                    await authRepository.logout(authProvider
-                        .user!.email); // Use non-null assertion operator
+                    await authRepository.logout(UserData
+                        .userData['email']); // Use non-null assertion operator
                     if (kDebugMode) {
                       print("2");
                     }
                     if (kDebugMode) {
-                      print(authProvider.user!.email.toString());
+                      print(UserData.userData['email'].toString());
                     }
 
                     // ignore: use_build_context_synchronously
