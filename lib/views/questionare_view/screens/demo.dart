@@ -93,15 +93,15 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
     final authProvider = Provider.of<AuthProvider>(context);
 
 // Access the shared data
-    String education = sharedData.dataFromeducationallevel!;
-    String role = sharedData.datafromdesiredrole!;
-    String skill = sharedData.datafromselectskill!;
-    String experience = sharedData.datafromworkexperience!;
+    String education = sharedData.selectedEduction;
+    String role = sharedData.selectedRole;
+    String skill = sharedData.selectedSkill;
+    String experience = sharedData.selectedWork;
 
-    // print('Eduction : $education');
-    // print('role : $role');
-    // print('skill : $skill');
-    // print('experience : $experience');
+    print('Eduction : $education');
+    print('role : $role');
+    print('skill : $skill');
+    print('experience : $experience');
 
     return GestureDetector(
       onTap: () {
@@ -125,7 +125,7 @@ class _PdfCreationPageState extends State<AiPdfCreationPage> {
                   isGettingData = true;
                 });
                 String userInput =
-                    "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is 'user', my academic qualification is $education, the role am appling for is $role, i have experience years of $experience in this field, additional skills are $skill. so help me construct it in full thanks.";
+                    "write a very full and complex resume that entails everything that an employer is looking for i will supply you with some data, but if by any chance, you need any data i didnt supply, you can add dummy data yourself. now, my name is ${UserData.userData['name'].toString()}, my academic qualification is $education, the role am appling for is $role, i have experience years of $experience in this field, additional skills are $skill. so help me construct it in full thanks.";
                 String cookie = UserData.userData['cookie'].toString();
                 print('My Cookie ====> $cookie');
 
