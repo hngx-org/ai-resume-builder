@@ -11,32 +11,34 @@ class CookieProvider with ChangeNotifier {
   }
 }
 
-
 class SharedData extends ChangeNotifier {
-  String? dataFromeducationallevel;
-  String? datafromdesiredrole;
-  String? datafromselectskill;
-  String? datafromworkexperience;
+  String _selectedEduction = "";
+  String _selectedRole = "";
+  String _selectedSkill = "";
+  String _selectedWork = "";
 
-  // Methods to update the data
+  String get selectedEduction => _selectedEduction;
+  String get selectedRole => _selectedRole;
+  String get selectedSkill => _selectedSkill;
+  String get selectedWork => _selectedWork;
+
   void updateDataFromdataFromeducationallevel(String newData) {
-    dataFromeducationallevel = newData;
+    _selectedEduction = newData;
     notifyListeners();
   }
 
   void updateDataFromdatafromdesiredrole(String newData) {
-    datafromdesiredrole = newData;
+    _selectedRole = newData;
     notifyListeners();
   }
 
   void updateDataFromdatafromselectskill(String newData) {
-    datafromselectskill = newData;
+    _selectedSkill = newData;
     notifyListeners();
   }
 
   void updateDataFromworkexperience(String newData) {
-    datafromworkexperience = newData;
+    _selectedWork = newData;
     notifyListeners();
   }
 }
-
