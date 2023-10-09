@@ -19,11 +19,6 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
   String selectedEducation = ""; // Track the selected education
   TextEditingController textEditingController = TextEditingController();
 
-  void _share(BuildContext context) {
-    final sharedData = Provider.of<SharedData>(context, listen: false);
-    sharedData.updateDataFromdataFromeducationallevel(selectedEducation);
-  }
-
   final List<String> education = [
     "Associate of Arts (AA)",
     "Associate of Applied Arts (AAA)",
@@ -76,6 +71,11 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
 
   @override
   Widget build(BuildContext context) {
+    void _share(BuildContext context) {
+      final sharedData = Provider.of<SharedData>(context, listen: false);
+      sharedData.updateDataFromdataFromeducationallevel(selectedEducation);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -179,11 +179,11 @@ class _EducationLevelScreenState extends State<EducationLevelScreen> {
                     return InkWell(
                       onTap: () {
                         // Get an instance of SharedData
-                        _share(context);
                         setState(() {
                           selectedEducation = selected ? "" : education[index];
                           textEditingController.text = selectedEducation;
                         });
+                        _share(context);
                       },
                       child: Container(
                         color: selected

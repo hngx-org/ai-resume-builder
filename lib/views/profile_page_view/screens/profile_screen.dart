@@ -111,7 +111,7 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    UserData.userData['name'].toString(),
+                    UserData.userData['name'].toString().toUpperCase(),
                     style: const TextStyle(
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w900,
